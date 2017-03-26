@@ -11,14 +11,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/signinFB"/>
+        android:src="@mipmap/signinfb"/>
     <ImageButton
         android:id="@+id/signinGG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/signinFB"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/signinFB"/>
+        android:src="@mipmap/signinfb"/>
     <TextView
         android:id="@+id/textSignin"
         android:layout_width="wrap_content"
