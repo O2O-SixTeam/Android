@@ -8,9 +8,37 @@
     tools:context="com.jspark.android.kardoc.LobbyActivity"
     tools:showIn="@layout/app_bar_lobby">
 
-    <Button
-        android:id="@+id/btnEnroll"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:text="견적 신청서" />
+        android:layout_height="wrap_content"
+        android:background="#dddddd"
+        android:orientation="vertical"
+        android:paddingTop="20sp"
+        android:paddingBottom="20sp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="어떤 서비스가 필요 하신가요?"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="실시간으로 수리비를 알아보고,\n차량 리뉴얼, 경정비 서비스를 신청할 수 있습니다.\n\n" />
+
+        <Button
+            android:id="@+id/btnEnroll"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="15sp"
+            android:layout_marginRight="15sp"
+            android:background="#ff00ddff"
+            android:text="서비스 신청하기 (견적신청서)"
+            android:textColor="@android:color/background_light" />
+    </LinearLayout>
+
 </RelativeLayout>
