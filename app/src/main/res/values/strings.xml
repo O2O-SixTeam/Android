@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Kardoc</string>
+
+    <!-- Sign Activity -->
+    <string name="signin"><u>Sign In</u></string>
+    <string name="id">Id</string>
+    <string name="pw">Password</string>
+    <string name="alertId">Check your Id again</string>
+    <string name="alertPw">Check your Password again</string>
+    <string name="title_activity_lobby">LobbyActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
