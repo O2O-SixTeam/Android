@@ -63,13 +63,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textResult"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="5sp"
-        android:paddingTop="5sp"
-        android:text=" List Result" />
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,17 +82,33 @@
                 android:layout_marginRight="15dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="5sp"
+                    android:paddingTop="5sp"
+                    android:text=" List Result"
+                    android:textSize="20sp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="브랜드 선택*"
+                        android:id="@+id/btnBrend"
+                        android:layout_weight="3"
+                        android:background="@android:color/background_light"/>
 
                     <EditText
                         android:id="@+id/editCarName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="차량명/ 연식*" />
+                        android:hint="차량명/ 연식*"
+                        android:layout_weight="1"/>
 
                 </LinearLayout>
 
@@ -226,6 +236,7 @@
                     android:textColor="@android:color/background_light" />
 
                 <Button
+                    android:id="@+id/btnWarranty"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:layout_marginTop="20dp"

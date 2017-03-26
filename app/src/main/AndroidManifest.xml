@@ -16,14 +16,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".WriteEstimationActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".SignActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".WriteEstimationActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SignActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LobbyActivity"
             android:label="@string/title_activity_lobby"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".WarrentyActivity" />
+        <activity android:name=".CallEstimationActivity" />
+        <activity android:name=".BrendActivity"></activity>
     </application>
 
 </manifest>

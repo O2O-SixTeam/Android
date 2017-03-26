@@ -24,6 +24,7 @@ public class WriteEstimationActivity extends AppCompatActivity {
     LinearLayout linear;
     Spinner spinnerOrg;
     Button btnAdd, btnFin, btnDel;
+    Button btnBrend, btnCallEstimation, btnWarranty;
 
     TextView textResult; //스피너의 값
 
@@ -51,7 +52,12 @@ public class WriteEstimationActivity extends AppCompatActivity {
         btnAdd = (Button)findViewById(R.id.btnAdd);
         btnFin = (Button)findViewById(R.id.btnFinish);
         btnDel = (Button)findViewById(R.id.btnDelete);
+
+        btnBrend =  (Button)findViewById(R.id.btnBrend);
+        btnCallEstimation = (Button)findViewById(R.id.btnCallEstimation);
+        btnWarranty = (Button)findViewById(R.id.btnWarranty);
         textResult = (TextView)findViewById(R.id.textResult);
+
 
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);
 
@@ -61,7 +67,31 @@ public class WriteEstimationActivity extends AppCompatActivity {
         setButtonFinish();
         setButtonDelete();
 
+        btnBrend.setOnClickListener(listener);
+        btnCallEstimation.setOnClickListener(listener);
+        btnWarranty.setOnClickListener(listener);
+
     }
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent;
+            switch (v.getId()){
+                case R.id.btnBrend:
+                    intent = new Intent(WriteEstimationActivity.this, BrendActivity.class );
+                    startActivity(intent);
+                    break;
+                case R.id.btnCallEstimation:
+                    intent = new Intent(WriteEstimationActivity.this,CallEstimationActivity.class);
+                    startActivity(intent);
+                    break;
+                case R.id.btnWarranty:
+                    intent = new Intent(WriteEstimationActivity.this,WarrentyActivity.class);
+                    startActivity(intent);
+                    break;
+            }
+        }
+    };
 
     private void setButtonAdd() {
 
@@ -95,18 +125,6 @@ public class WriteEstimationActivity extends AppCompatActivity {
                     }
                 }
                 textResult.setText(result);
-
-//                //TODO modify Inetent
-//                Intent i = new Intent(WriteEstimationActivity.this, WriteEstimationActivity.class);
-//                i.putExtra("count", viewNum);
-//                i.putExtra("resultOrg", spinnerOrg.getSelectedItem().toString());
-//                if(viewNum >0){
-//                    for(int j = 1; j< viewNum +1; j++) {
-//                        Spinner getSpinner = (Spinner)findViewById(viewPreId +j);
-//                        i.putExtra("result"+j, getSpinner.getSelectedItem().toString());
-//                    }
-//                }
-//                startActivity(i);
             }
         });
     }
