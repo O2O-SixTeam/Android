@@ -8,4 +8,9 @@
     tools:context="com.jspark.android.kardoc.LobbyActivity"
     tools:showIn="@layout/app_bar_lobby">
 
+    <Button
+        android:id="@+id/btnEnroll"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="견적 신청서" />
 </RelativeLayout>

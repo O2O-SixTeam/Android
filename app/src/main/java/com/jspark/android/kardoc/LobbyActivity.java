@@ -1,5 +1,6 @@
 package com.jspark.android.kardoc;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,14 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class LobbyActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Button btnEnroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
+
+        btnEnroll = (Button)findViewById(R.id.btnEnroll);
+        btnEnroll.setOnClickListener(listener);
+
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -98,4 +107,10 @@ public class LobbyActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    View.OnClickListener listener = v -> {
+        Intent intent = new Intent(LobbyActivity.this, WriteEstimationActivity.class);
+        startActivity(intent);
+
+    };
 }
