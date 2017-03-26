@@ -5,13 +5,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     private final static int LOADING_SPEED = 3000;
-
-
 
     Thread splash = new Thread(new Runnable() {
         @Override
@@ -43,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         splash.start();
+        finish();
     }
 
 }

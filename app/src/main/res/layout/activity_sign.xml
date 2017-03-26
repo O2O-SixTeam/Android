@@ -10,21 +10,26 @@
         android:id="@+id/signinFB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/signinfb"/>
+        android:layout_marginBottom="16dp"
+        android:src="@mipmap/signinfb"
+        android:layout_marginTop="64dp"
+        android:padding="0dp"
+        android:layout_centerHorizontal="true"/>
     <ImageButton
         android:id="@+id/signinGG"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:layout_below="@id/signinFB"
-        android:layout_centerHorizontal="true"
-        android:src="@mipmap/signinfb"/>
+        android:src="@mipmap/signingg"
+        android:padding="0dp"
+        android:layout_centerHorizontal="true" />
     <TextView
         android:id="@+id/textSignin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/signinGG"
         android:layout_alignLeft="@id/signinGG"
+        android:layout_centerVertical="true"
         android:text="@string/signin"
         android:textSize="25sp"
         android:layout_marginBottom="15dp"/>

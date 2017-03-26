@@ -41,6 +41,7 @@ public class SignActivity extends AppCompatActivity {
         btnSignin.setOnClickListener((v) -> {
             Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
             startActivity(i);
+            finish();
         });
     }
 }
