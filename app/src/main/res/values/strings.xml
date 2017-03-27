@@ -16,4 +16,7 @@
     <string name="information1">어떤 서비스가 필요 하신가요?</string>
     <string name="information2">실시간으로 수리비를 알아보고,\n차량 리뉴얼, 경정비 서비스를 신청할 수 있습니다.</string>
     <string name="requestSevice">서비스 신청하기 (견적신청서)</string>
+
+    <!--Facebook Login-->
+    <string name="facebook_app_id">268254320295870</string>
 </resources>
