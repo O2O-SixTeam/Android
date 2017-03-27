@@ -1,4 +1,8 @@
 # Kardoc Android
+
+## 17.03.27
+<del>1. SignIn 페이스북 연동 로그인 구현.</del>
+
 ## 17.03.26
 <del>1. MainActivity -> Splash로 사용</del>  
 <del>2. LobbyActivity를 네비게이션 액티비티로 생성</del>  
