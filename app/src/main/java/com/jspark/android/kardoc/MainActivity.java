@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             if(LOADING_SPEED==msg.what) {
                 Intent i = new Intent(MainActivity.this, SignActivity.class);
                 startActivity(i);
+                finish();
             }
         }
     };
@@ -40,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         splash.start();
-        finish();
     }
 
 }
