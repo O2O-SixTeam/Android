@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,38 +8,73 @@
     tools:context="com.jspark.android.kardoc.LobbyActivity"
     tools:showIn="@layout/app_bar_lobby">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#dddddd"
-        android:orientation="vertical"
-        android:paddingTop="20sp"
-        android:paddingBottom="20sp">
-
-        <TextView
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/enrollLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/information1"
-            android:textSize="20sp" />
-
+            android:background="#FFECF0F1"
+            android:orientation="vertical"
+            android:paddingTop="20sp"
+            android:paddingBottom="20sp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/information1"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center"
+                android:text="@string/information2" />
+            <Button
+                android:id="@+id/btnEnroll"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="15sp"
+                android:layout_marginRight="15sp"
+                android:background="#ff00ddff"
+                android:text="@string/requestSevice"
+                android:textColor="#FFFFFFFF" />
+        </LinearLayout>
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/divider1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="@string/information2" />
-
-        <Button
-            android:id="@+id/btnEnroll"
+            android:layout_height="8dp"
+            android:layout_below="@id/enrollLayout"
+            android:background="#FFDDDDDD"/>
+        <ImageView
+            android:id="@+id/case1"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="15sp"
-            android:layout_marginRight="15sp"
-            android:background="#ff00ddff"
-            android:text="@string/requestSevice"
-            android:textColor="#FFFFFFFF" />
-    </LinearLayout>
+            android:layout_height="180dp"
+            android:layout_below="@id/divider1"/>
+        <TextView
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/case1"
+            android:background="#FFDDDDDD"/>
+        <ImageView
+            android:id="@+id/case2"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/divider2"/>
+        <TextView
+            android:id="@+id/divider3"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/case2"
+            android:background="#FFDDDDDD"/>
+        <ImageView
+            android:id="@+id/case3"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/divider3"/>
+    </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

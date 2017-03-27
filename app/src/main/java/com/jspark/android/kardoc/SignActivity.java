@@ -12,56 +12,54 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-
-import org.json.JSONObject;
 
 import java.util.Arrays;
 
 public class SignActivity extends AppCompatActivity {
+
     LoginButton signinFacebook;
     private CallbackManager callbackManager;
 
-    TextView alertId, alertPw;
+    TextView alertId, alertPw, newCenter;
     EditText editId, editPw;
-    Button btnSignin;
-
-
+    Button btnSignup, btnSignin, btnForgetPw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        callbackManager = CallbackManager.Factory.create();
-
         setContentView(R.layout.activity_sign);
 
         setWidgets();
 
+        setCallbackManager();
+        setSigninFacebook();
+
         checkId();
 
         setBtnSignin();
+    }
 
-        //--------------Facebook Login-------------------
+    private void setCallbackManager() {
+        callbackManager = CallbackManager.Factory.create();
+    }
+
+    private void setSigninFacebook() {
         signinFacebook = (LoginButton) findViewById(R.id.signinFacebook);
         signinFacebook.setReadPermissions(Arrays.asList("public_profile", "email"));
         signinFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
-                    @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
-                        Log.i("result", object.toString());
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
-                        startActivity(i);
+                GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), (object, response) -> {
+                    Log.i("result", object.toString());
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
+                    Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
+                    startActivity(i);
                 });
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "id,name,email,gender,birthday");
@@ -79,8 +77,8 @@ public class SignActivity extends AppCompatActivity {
                 Log.e("LoginErr",error.toString());
             }
         });
-        //-----------------------------------------------
     }
+
     //---------Facebook Login------
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -94,7 +92,10 @@ public class SignActivity extends AppCompatActivity {
         editPw = (EditText)findViewById(R.id.editPw);
         alertId = (TextView)findViewById(R.id.errorId);
         alertPw = (TextView)findViewById(R.id.errorPw);
+        newCenter = (TextView)findViewById(R.id.signinCenter);
+        btnSignup = (Button)findViewById(R.id.btnSignup);
         btnSignin = (Button)findViewById(R.id.btnSignin);
+        btnForgetPw = (Button)findViewById(R.id.btnForgetPw);
     }
 
     private void checkId() {

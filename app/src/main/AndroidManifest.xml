@@ -30,7 +30,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".WarrentyActivity" />
         <activity android:name=".CallEstimationActivity" />
-        <activity android:name=".BrendActivity"></activity>
+        <activity android:name=".BrandActivity"/>
 
     </application>
 

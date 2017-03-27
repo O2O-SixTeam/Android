@@ -78,7 +78,7 @@ public class WriteEstimationActivity extends AppCompatActivity {
             Intent intent;
             switch (v.getId()){
                 case R.id.btnBrend:
-                    intent = new Intent(WriteEstimationActivity.this, BrendActivity.class );
+                    intent = new Intent(WriteEstimationActivity.this, BrandActivity.class );
                     startActivity(intent);
                     break;
                 case R.id.btnCallEstimation:

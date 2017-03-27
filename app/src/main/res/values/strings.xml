@@ -2,7 +2,11 @@
     <string name="app_name">Kardoc</string>
 
     <!-- Sign Activity -->
-    <string name="signin"><u>Sign In</u></string>
+    <string name="signinText"><u>Sign In</u></string>
+    <string name="signin">Sign In</string>
+    <string name="signup">Sign Up</string>
+    <string name="forgetpassword">Forget"\n"Password</string>
+    <string name="newCenter"><u>Create new Partnership</u></string>
     <string name="id">Id</string>
     <string name="pw">Password</string>
     <string name="alertId">Check your Id again</string>

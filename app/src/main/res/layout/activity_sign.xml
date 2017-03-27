@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/signinGG"
         android:layout_centerVertical="true"
-        android:text="@string/signin"
+        android:text="@string/signinText"
         android:textSize="25sp"
         android:layout_marginBottom="15dp"/>
     <TextView
@@ -82,11 +82,39 @@
         android:textColor="#FFFF0000"
         android:visibility="gone"/>
     <Button
+        android:id="@+id/btnSignup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/errorPw"
+        android:layout_marginLeft="16dp"
+        android:text="@string/signup"/>
+    <Button
         android:id="@+id/btnSignin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/errorPw"
         android:layout_centerHorizontal="true"
         android:text="@string/signin"/>
+    <Button
+        android:id="@+id/btnForgetPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/errorPw"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/forgetpassword"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/signinCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:text="@string/newCenter"
+        android:textColor="#FF0000FF" />
+
 
 </RelativeLayout>
