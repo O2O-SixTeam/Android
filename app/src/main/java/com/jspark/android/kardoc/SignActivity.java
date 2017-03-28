@@ -23,6 +23,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.SignUtil;
+import com.jspark.android.kardoc.util.TextUtil;
 
 import java.util.Arrays;
 
@@ -142,7 +143,7 @@ public class SignActivity extends AppCompatActivity {
             btnNegative = (Button)customdialog.findViewById(R.id.buttonCancle);
             btnPositive = (Button)customdialog.findViewById(R.id.buttonSignup);
 
-            // 전화번호 하이픈 자동 입력
+            // 전화번호 하이픈 자동 입
             editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
             // 버튼 리스너
@@ -150,16 +151,20 @@ public class SignActivity extends AppCompatActivity {
             btnPositive.setOnClickListener((v2)-> {
                 RadioButton genderButton = (RadioButton)customdialog.findViewById(genderGroup.getCheckedRadioButtonId());
 
+                boolean hasError = false;
+
                 // 성, 이름 검사
                 if(!("".equals(EditUtil.gTFE(editFamily)))) {
                     Log.w("Dialog Button Test", "성 : "+EditUtil.gTFE(editFamily));
                     if(!("".equals(EditUtil.gTFE(editGiven)))) {
                         Log.w("Dialog Button Test", "이름 : "+EditUtil.gTFE(editGiven));
                     } else {
+                        hasError = true;
                         editGiven.requestFocus();
                         Toast.makeText(SignActivity.this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
                 } else {
+                    hasError = true;
                     Toast.makeText(SignActivity.this, "성을 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
 
@@ -167,12 +172,15 @@ public class SignActivity extends AppCompatActivity {
                 if(EditUtil.gTFE(editPhone).length()==13) {
                     Log.w("Dialog Button Test", "폰 : " + EditUtil.gTFE(editPhone));
                 } else {
+                    hasError = true;
                     Toast.makeText(SignActivity.this, "폰 번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
 
                 // 성별 체크 검사
                 if(genderButton!=null) {
                     Log.w("Dialog Button Test", "성별 : "+genderButton.getText().toString());
+                } else {
+                    hasError = true;
                 }
 
                 // 생년월일 검사
@@ -180,7 +188,9 @@ public class SignActivity extends AppCompatActivity {
                     alertBirth.setVisibility(View.GONE);
                     Log.w("Dialog Button Test", "년 : " + EditUtil.gTFE(editBirthYear) + " 월 : " + EditUtil.gTFE(editBirthMonth) + " 일 : " + EditUtil.gTFE(editBirthDay));
                 } else {
+                    hasError = true;
                     alertBirth.setVisibility(View.VISIBLE);
+                    TextUtil.alertTextGone(alertBirth);
                 }
 
 
@@ -189,19 +199,48 @@ public class SignActivity extends AppCompatActivity {
                     alertId.setVisibility(View.GONE);
                     Log.w("Dialog Email Check", EditUtil.gTFE(editId));
                 } else {
+                    hasError = true;
                     alertId.setVisibility(View.VISIBLE);
+                    TextUtil.alertTextGone(alertId);
                 }
 
+                // 비밀번호 형식 검사
                 if(SignUtil.validatePassword(EditUtil.gTFE(editPw))) {
                     alertPw.setVisibility(View.GONE);
                     Log.w("Dialog Password Check", EditUtil.gTFE(editPw));
                 } else {
+                    hasError = true;
                     alertPw.setVisibility(View.VISIBLE);
+                    TextUtil.alertTextGone(alertPw);
                 }
-                Log.w("Dialog Button Test", "개인정보 : "+personalInformation.isChecked());
+
+                // 비밀번호 확인 검사
+                if(SignUtil.checkTwoPasswords(EditUtil.gTFE(editPw), EditUtil.gTFE(editPwcheck))) {
+                    Log.w("Dialog Password Check", "Two Passwords are same");
+                } else {
+                    hasError = true;
+                    alertPwCheck.setVisibility(View.VISIBLE);
+                    TextUtil.alertTextGone(alertPwCheck);
+                }
+
+                if(personalInformation.isChecked()) {
+                    Log.w("Dialog Button Test", "개인정보 : "+personalInformation.isChecked());
+                } else {
+                    hasError  = true;
+                    Toast.makeText(SignActivity.this, "개인 정보 수집 / 이용 내역에 동의해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+
+                if(!hasError) {
+                    // 서버로 회원정보 전송
+                    Toast.makeText(SignActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
+                    customdialog.dismiss();
+                } else {
+
+                }
             });
 
-            // 커스텀 다이얼로그 시작작
+            // 커스텀 다이얼로그 시작
            customdialog.show();
         });
     }

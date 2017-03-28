@@ -27,9 +27,10 @@
     <string name="pwcheck">Password Check</string>
     <string name="alertId">Check your Id again</string>
     <string name="alertPw">Check your Password again</string>
+    <string name="alertPwCheck">Password are not same</string>
     <string name="exampleId">example@test.com</string>
     <string name="examplePw">**********</string>
-    <string name="exampleNewPw">6 - 16 words</string>
+    <string name="exampleNewPw">6 – 16 words</string>
     <string name="cancle">Cancle</string>
     <string name="acceptprivatetext">Personal Information Collection Agreement</string>
     <string name="acceptprivate">Accept using personal information</string>
