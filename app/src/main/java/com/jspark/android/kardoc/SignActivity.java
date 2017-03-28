@@ -259,9 +259,10 @@ public class SignActivity extends AppCompatActivity {
         signinRepairShop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i  = new Intent(SignActivity.this, SigninRepairShopActivity.class);
+               Intent i = new Intent(SignActivity.this, SigninRepairShopActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                //A->B->A 의 순서로 Activity 호출이 일어날때, 새로운 A 가 생성되는 대신 아래쪽에 위치한 A 가 위로 올라와 최종적으로 B->A 의 형태로 Task 가 구성.
                 startActivity(i);
-                finish();
             }
         });
     }

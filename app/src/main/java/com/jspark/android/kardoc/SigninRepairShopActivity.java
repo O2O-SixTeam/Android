@@ -32,7 +32,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         btnCancle = (Button)findViewById(R.id.buttonCancleCompany);
 
         setBtnSignup();
-       // setBtnSignin();
+        setBtnCancle();
 
     }
     private void setBtnSignup() {
@@ -65,7 +65,6 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
 
             // 버튼 리스너
-            btnCancle.setOnClickListener((v1) -> finish());//TODO: check this
             btnSignup.setOnClickListener((v2)-> {
                 RadioButton genderButton = (RadioButton)findViewById(genderGroup.getCheckedRadioButtonId());
 
@@ -160,6 +159,9 @@ public class SigninRepairShopActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+    private void setBtnCancle() {
+        btnCancle.setOnClickListener((v1) -> onBackPressed());
     }
 
 }
