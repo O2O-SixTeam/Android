@@ -9,9 +9,9 @@
     <string name="forgetpassword">Forget"\n"Password</string>
     <string name="newCenter"><u>Create new Partnership</u></string>
     <string name="familyname">Family Name</string>
-    <string name="lastname">Hong</string>
+    <string name="lastname">홍</string>
     <string name="givenname">Given Name</string>
-    <string name="firstname">Gildong</string>
+    <string name="firstname">길동</string>
     <string name="phone">Phone Number</string>
     <string name="examplephone">except \'-\'(hyphen)</string>
     <string name="gender">Gender</string>
@@ -21,6 +21,7 @@
     <string name="year">YYYY</string>
     <string name="month">MM</string>
     <string name="day">DD</string>
+    <string name="alertBirth">Check your Birthday again</string>
     <string name="id">Id</string>
     <string name="pw">Password</string>
     <string name="pwcheck">Password Check</string>
@@ -28,7 +29,7 @@
     <string name="alertPw">Check your Password again</string>
     <string name="exampleId">example@test.com</string>
     <string name="examplePw">**********</string>
-    <string name="exampleNewPw">a–Z 0–9 !@#$%^* (at least 10 words)</string>
+    <string name="exampleNewPw">6 - 16 words</string>
     <string name="cancle">Cancle</string>
     <string name="acceptprivatetext">Personal Information Collection Agreement</string>
     <string name="acceptprivate">Accept using personal information</string>
