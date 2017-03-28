@@ -357,7 +357,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/checkPrivate"
             android:layout_marginRight="16dp"
-            android:layout_toLeftOf="@id/buttonSignup"
+            android:layout_toLeftOf="@id/buttonSignupCompany"
             android:text="@string/cancle" />
 
     </RelativeLayout>
