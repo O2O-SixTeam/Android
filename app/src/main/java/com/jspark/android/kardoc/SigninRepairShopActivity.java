@@ -32,7 +32,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         btnCancle = (Button)findViewById(R.id.buttonCancleCompany);
 
         setBtnSignup();
-        setBtnSignin();
+       // setBtnSignin();
 
     }
     private void setBtnSignup() {
@@ -151,6 +151,8 @@ public class SigninRepairShopActivity extends AppCompatActivity {
 
                 if(!hasError) {
                     // 서버로 회원정보 전송
+                    Intent i  = new Intent(SigninRepairShopActivity.this, LobbyActivity.class);
+                    startActivity(i);
                     Toast.makeText(SigninRepairShopActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -160,11 +162,4 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         });
     }
 
-    private void setBtnSignin() {
-        btnSignup.setOnClickListener((v) -> {
-            Intent i  = new Intent(SigninRepairShopActivity.this, LobbyActivity.class);
-            startActivity(i);
-            finish();
-        });
-    }
 }
