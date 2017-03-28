@@ -31,16 +31,18 @@ public class SignActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
-
+        // 위젯 선언
         setWidgets();
 
+        // 페이스북 로그인 기능
         setCallbackManager();
         setSigninFacebook();
 
-        checkId();
-
+        // 회원가입 버튼 기능
         setBtnSignup();
-        setBtnSignin();
+
+        // 로그인 버튼 기능능
+       setBtnSignin();
     }
 
     private void setCallbackManager() {
