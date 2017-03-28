@@ -32,7 +32,7 @@
     <string name="examplePw">**********</string>
     <string name="exampleNewPw">6 – 16 words</string>
     <string name="cancle">Cancle</string>
-    <string name="acceptprivatetext">Personal Information Collection Agreement</string>
+    <string name="acceptprivatetext">\nPersonal Information Collection Agreement</string>
     <string name="acceptprivate">Accept using personal information</string>
 
     <!-- Lobby Activity-->

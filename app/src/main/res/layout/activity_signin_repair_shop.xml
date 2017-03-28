@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.jspark.android.kardoc.SigninRepairShopActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/signupText"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/textFamilyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textSignup"
+            android:text="@string/familyname" />
+
+        <EditText
+            android:id="@+id/editFamilyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/textFamilyName"
+            android:layout_alignRight="@id/textFamilyName"
+            android:layout_below="@id/textFamilyName"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:hint="@string/lastname"
+            android:inputType="text"
+            android:maxLength="7" />
+
+        <TextView
+            android:id="@+id/textGivenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/textFamilyName"
+            android:layout_marginLeft="24dp"
+            android:layout_toRightOf="@id/editFamilyName"
+            android:text="@string/givenname" />
+
+        <EditText
+            android:id="@+id/editGivenName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/textGivenName"
+            android:layout_alignRight="@id/textGivenName"
+            android:layout_below="@id/textGivenName"
+            android:gravity="center"
+            android:hint="@string/firstname"
+            android:inputType="text"
+            android:maxLength="7" />
+
+        <TextView
+            android:id="@+id/textPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editGivenName"
+            android:text="@string/phone" />
+
+        <EditText
+            android:id="@+id/editPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textPhone"
+            android:hint="@string/examplephone"
+            android:inputType="phone"
+            android:maxLength="13" />
+
+        <TextView
+            android:id="@+id/textGender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editPhone"
+            android:text="@string/gender" />
+
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textGender"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/genderMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/genderFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/genderGroup"
+            android:text="@string/birth" />
+
+        <EditText
+            android:id="@+id/editYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textBirth"
+            android:layout_marginRight="16dp"
+            android:hint="@string/year"
+            android:inputType="numberDecimal"
+            android:maxLength="4"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <EditText
+            android:id="@+id/editMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textBirth"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/editYear"
+            android:hint="@string/month"
+            android:inputType="numberDecimal"
+            android:maxLength="2"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <EditText
+            android:id="@+id/editDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textBirth"
+            android:layout_toRightOf="@id/editMonth"
+            android:hint="@string/day"
+            android:inputType="numberDecimal"
+            android:maxLength="2"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <TextView
+            android:id="@+id/errorBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editYear"
+            android:text="@string/alertBirth"
+            android:textColor="#FFFF0000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/errorBirth"
+            android:text="@string/id" />
+
+        <EditText
+            android:id="@+id/editId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textId"
+            android:hint="@string/exampleId"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/errorId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editId"
+            android:text="@string/alertId"
+            android:textColor="#FFFF0000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textPw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/errorId"
+            android:text="@string/pw" />
+
+        <EditText
+            android:id="@+id/editPw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textPw"
+            android:hint="@string/exampleNewPw"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/errorPw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editPw"
+            android:text="@string/alertPw"
+            android:textColor="#FFFF0000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textPwCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/errorPw"
+            android:text="@string/pwcheck" />
+
+        <EditText
+            android:id="@+id/editPwCheck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textPwCheck"
+            android:hint="@string/exampleNewPw"
+            android:inputType="textPassword"
+            android:maxLength="16"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/errorPwCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editPwCheck"
+            android:text="@string/alertPwCheck"
+            android:textColor="#FFFF0000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/corporateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/errorPwCheck"
+            android:text="Corporate Name" />
+
+        <EditText
+            android:id="@+id/editCompanyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/corporateName"
+            android:hint="ex) Kardoc Motors" />
+
+        <TextView
+            android:id="@+id/companyAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCompanyName"
+            android:text="Comapny Address" />
+
+        <EditText
+            android:id="@+id/editCompanyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/companyAddress"
+            android:hint="ex) Seoul Gangnam" />
+
+        <TextView
+            android:id="@+id/companyIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCompanyAddress"
+            android:text="Company Introduction" />
+
+        <EditText
+            android:id="@+id/editCompanyIntroduction"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/companyIntroduction"
+            android:background="@drawable/edit_text_styling"
+            android:hint="ex) My company is Really nice~" />
+
+        <Button
+            android:id="@+id/addPicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCompanyIntroduction"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/darker_gray"
+            android:text="add Picture" />
+
+        <HorizontalScrollView
+            android:id="@+id/imageScroll"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@id/addPicture"
+            android:background="@drawable/edit_text_styling">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgView1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="20dp" />
+
+                <ImageView
+                    android:id="@+id/imgView2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="20dp" />
+
+                <ImageView
+                    android:id="@+id/imgView3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="20dp" />
+
+                <ImageView
+                    android:id="@+id/imgView4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginRight="20dp" />
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textPrivate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageScroll"
+            android:text="@string/acceptprivatetext" />
+
+        <CheckBox
+            android:id="@+id/checkPrivate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textPrivate"
+            android:text="@string/acceptprivate" />
+
+        <Button
+            android:id="@+id/buttonSignupCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/checkPrivate"
+            android:text="@string/signup" />
+
+        <Button
+            android:id="@+id/buttonCancleCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkPrivate"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/buttonSignup"
+            android:text="@string/cancle" />
+
+    </RelativeLayout>
+</ScrollView>

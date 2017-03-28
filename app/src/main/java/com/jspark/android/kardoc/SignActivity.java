@@ -32,7 +32,7 @@ public class SignActivity extends AppCompatActivity {
     private LoginButton signinFacebook;
     private CallbackManager callbackManager;
 
-    private TextView alertId, alertPw, newCenter;
+    private TextView alertId, alertPw, signinRepairShop;
     private EditText editId, editPw;
     private Button btnSignup, btnSignin, btnForgetPw;
 
@@ -52,6 +52,9 @@ public class SignActivity extends AppCompatActivity {
 
         // 로그인 버튼 기능능
        setBtnSignin();
+
+        //공업사 로그인 기능
+        setSigninRepairShop();
     }
 
     private void setCallbackManager() {
@@ -105,7 +108,7 @@ public class SignActivity extends AppCompatActivity {
         editPw = (EditText)findViewById(R.id.editPw);
         alertId = (TextView)findViewById(R.id.errorId);
         alertPw = (TextView)findViewById(R.id.errorPw);
-        newCenter = (TextView)findViewById(R.id.signinCenter);
+        signinRepairShop = (TextView)findViewById(R.id.signinRepairShop); //공업사 회원가입 Activity로 이동.
         btnSignup = (Button)findViewById(R.id.btnSignup);
         btnSignin = (Button)findViewById(R.id.btnSignin);
         btnForgetPw = (Button)findViewById(R.id.btnForgetPw);
@@ -250,6 +253,16 @@ public class SignActivity extends AppCompatActivity {
             Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
             startActivity(i);
             finish();
+        });
+    }
+    private void setSigninRepairShop(){
+        signinRepairShop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i  = new Intent(SignActivity.this, SigninRepairShopActivity.class);
+                startActivity(i);
+                finish();
+            }
         });
     }
 }
