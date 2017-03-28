@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -109,10 +112,49 @@ public class SignActivity extends AppCompatActivity {
     private void setBtnSignup() {
         btnSignup.setOnClickListener((v) -> {
 
+            EditText editFamily, editGiven, editPhone, editBirthYear, editBirthMonth, editBirthDay, editId, editPw, editPwcheck;
+            TextView alertId, alertPw, alertPwCheck;
+            RadioGroup genderGroup;
+            CheckBox personalInformation;
+            Button btnNegative, btnPositive;
 
+            // 커스텀 다이얼로그 생성
             Dialog customdialog = new Dialog(SignActivity.this);
             customdialog.setContentView(R.layout.signupdialog);
-            customdialog.show();
+
+            // 위젯 선언
+            editFamily = (EditText)customdialog.findViewById(R.id.editFamilyName);
+            editGiven = (EditText)customdialog.findViewById(R.id.editGivenName);
+            editPhone = (EditText)customdialog.findViewById(R.id.editPhone);
+            editBirthYear = (EditText)customdialog.findViewById(R.id.editYear);
+            editBirthMonth = (EditText)customdialog.findViewById(R.id.editMonth);
+            editBirthDay = (EditText)customdialog.findViewById(R.id.editDay);
+            editId = (EditText)customdialog.findViewById(R.id.editId);
+            alertId = (TextView)customdialog.findViewById(R.id.errorId);
+            editPw = (EditText)customdialog.findViewById(R.id.editPw);
+            alertPw = (TextView)customdialog.findViewById(R.id.errorPw);
+            editPwcheck = (EditText)customdialog.findViewById(R.id.editPwCheck);
+            alertPwCheck = (TextView)customdialog.findViewById(R.id.errorPwCheck);
+            genderGroup = (RadioGroup)customdialog.findViewById(R.id.genderGroup);
+            personalInformation = (CheckBox)customdialog.findViewById(R.id.checkPrivate);
+            btnNegative = (Button)customdialog.findViewById(R.id.buttonCancle);
+            btnPositive = (Button)customdialog.findViewById(R.id.buttonSignup);
+
+            // 버튼 리스너
+            btnNegative.setOnClickListener((v1) -> {});
+            btnPositive.setOnClickListener((v2)-> {
+                RadioButton genderButton = (RadioButton)customdialog.findViewById(genderGroup.getCheckedRadioButtonId());
+
+                Log.w("Dialog Button Test", "성 : "+gTFE(editFamily)+" 이름 : "+gTFE(editGiven));
+                Log.w("Dialog Button Test", "폰 : "+gTFE(editPhone));
+                Log.w("Dialog Button Test", "성별 : "+genderButton.getText().toString());
+                Log.w("Dialog Button Test", "년 : "+gTFE(editBirthYear)+" 월 : "+gTFE(editBirthMonth)+" 일 : "+gTFE(editBirthDay));
+                Log.w("Dialog Button Test", "id : "+gTFE(editId)+" pw : "+gTFE(editPw));
+                Log.w("Dialog Button Test", "개인정보 : "+personalInformation.isChecked());
+            });
+
+            // 커스텀 다이얼로그 시작작
+           customdialog.show();
         });
     }
 
@@ -122,5 +164,11 @@ public class SignActivity extends AppCompatActivity {
             startActivity(i);
             finish();
         });
+    }
+
+    // getTextFromEditText
+    private String gTFE(EditText edit) {
+
+        return edit.getText().toString();
     }
 }
