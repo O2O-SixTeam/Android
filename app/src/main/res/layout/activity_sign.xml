@@ -48,7 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textId"
         android:layout_alignLeft="@id/signinFacebook"
-        android:layout_alignRight="@id/signinFacebook"/>
+        android:layout_alignRight="@id/signinFacebook"
+        android:hint="@string/exampleId"/>
     <TextView
         android:id="@+id/errorId"
         android:layout_width="wrap_content"
@@ -71,7 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textPw"
         android:layout_alignLeft="@id/signinFacebook"
-        android:layout_alignRight="@id/signinFacebook"/>
+        android:layout_alignRight="@id/signinFacebook"
+        android:hint="@string/examplePw"/>
     <TextView
         android:id="@+id/errorPw"
         android:layout_width="wrap_content"
@@ -112,9 +114,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/newCenter"
         android:textColor="#FF0000FF" />
-
-
 </RelativeLayout>

@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final static int LOADING_SPEED = 3000;
+    private final int LOADING_SPEED = 2000;
 
     Thread splash = new Thread(new Runnable() {
         @Override

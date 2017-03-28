@@ -4,13 +4,34 @@
     <!-- Sign Activity -->
     <string name="signinText"><u>Sign In</u></string>
     <string name="signin">Sign In</string>
+    <string name="signupText"><u>Sign Up</u></string>
     <string name="signup">Sign Up</string>
     <string name="forgetpassword">Forget"\n"Password</string>
     <string name="newCenter"><u>Create new Partnership</u></string>
+    <string name="familyname">Family Name</string>
+    <string name="lastname">Hong</string>
+    <string name="givenname">Given Name</string>
+    <string name="firstname">Gildong</string>
+    <string name="phone">Phone Number</string>
+    <string name="examplephone">except \'-\'(hyphen)</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="birth">Birth Day</string>
+    <string name="year">YYYY</string>
+    <string name="month">MM</string>
+    <string name="day">DD</string>
     <string name="id">Id</string>
     <string name="pw">Password</string>
+    <string name="pwcheck">Password Check</string>
     <string name="alertId">Check your Id again</string>
     <string name="alertPw">Check your Password again</string>
+    <string name="exampleId">example@test.com</string>
+    <string name="examplePw">**********</string>
+    <string name="exampleNewPw">a–Z 0–9 !@#$%^* (at least 10 words)</string>
+    <string name="cancle">Cancle</string>
+    <string name="acceptprivatetext">Personal Information Collection Agreement</string>
+    <string name="acceptprivate">Accept using personal information</string>
 
     <!-- Lobby Activity-->
     <string name="title_activity_lobby">LobbyActivity</string>

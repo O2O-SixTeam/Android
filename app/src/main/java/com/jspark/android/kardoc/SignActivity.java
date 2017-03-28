@@ -1,5 +1,6 @@
 package com.jspark.android.kardoc;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,12 +20,12 @@ import java.util.Arrays;
 
 public class SignActivity extends AppCompatActivity {
 
-    LoginButton signinFacebook;
+    private LoginButton signinFacebook;
     private CallbackManager callbackManager;
 
-    TextView alertId, alertPw, newCenter;
-    EditText editId, editPw;
-    Button btnSignup, btnSignin, btnForgetPw;
+    private TextView alertId, alertPw, newCenter;
+    private EditText editId, editPw;
+    private Button btnSignup, btnSignin, btnForgetPw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class SignActivity extends AppCompatActivity {
 
         checkId();
 
+        setBtnSignup();
         setBtnSignin();
     }
 
@@ -100,6 +102,16 @@ public class SignActivity extends AppCompatActivity {
 
     private void checkId() {
         // make Logic to check Id&Pw
+    }
+
+    private void setBtnSignup() {
+        btnSignup.setOnClickListener((v) -> {
+
+
+            Dialog customdialog = new Dialog(SignActivity.this);
+            customdialog.setContentView(R.layout.signupdialog);
+            customdialog.show();
+        });
     }
 
     private void setBtnSignin() {
