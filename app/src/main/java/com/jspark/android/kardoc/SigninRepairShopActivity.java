@@ -30,11 +30,11 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         btnSignup = (Button)findViewById(R.id.buttonSignupCompany);
         btnCancle = (Button)findViewById(R.id.buttonCancleCompany);
 
-        setBtnSignup();
+        setBtnSignupCompany();
         setBtnCancle();
 
     }
-    private void setBtnSignup() {
+    private void setBtnSignupCompany() {
         btnSignup.setOnClickListener(v -> {
             EditText editFamily, editGiven, editPhone, editBirthYear, editBirthMonth, editBirthDay, editId, editPw, editPwcheck;
             TextView alertBirth, alertId, alertPw, alertPwCheck;
