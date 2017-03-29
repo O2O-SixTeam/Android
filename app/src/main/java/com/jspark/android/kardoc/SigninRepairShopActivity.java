@@ -1,9 +1,8 @@
 package com.jspark.android.kardoc;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -42,7 +41,6 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             RadioGroup genderGroup;
             CheckBox personalInformation;
 
-
             // 위젯 선언
             editFamily = (EditText)findViewById(R.id.editFamilyName);
             editGiven = (EditText)findViewById(R.id.editGivenName);
@@ -59,7 +57,6 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             alertPwCheck = (TextView)findViewById(R.id.errorPwCheck);
             genderGroup = (RadioGroup)findViewById(R.id.genderGroup);
             personalInformation = (CheckBox)findViewById(R.id.checkPrivate);
-
 
             // 전화번호 하이픈 자동 입
             editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
