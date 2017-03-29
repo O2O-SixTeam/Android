@@ -51,7 +51,7 @@ public class SignActivity extends AppCompatActivity {
         setBtnSignup();
 
         // 로그인 버튼 기능능
-       setBtnSignin();
+        setBtnSignin();
 
         //공업사 로그인 기능
         setSigninRepairShop();
