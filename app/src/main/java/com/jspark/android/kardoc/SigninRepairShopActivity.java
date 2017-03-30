@@ -96,16 +96,16 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                int index = Integer.valueOf((String)monthSpinner.getSelectedItem());
-                String selectCity =  cityNames[index];
+                String selectCity =  cityNames[position];
                 if (selectCity.equals("서울특별시")) {
 
-                    Toast.makeText(SigninRepairShopActivity.this, "선택 되엇습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SigninRepairShopActivity.this, "선택 되었습니다.", Toast.LENGTH_SHORT).show();
                     guSpinner.setVisibility(Spinner.VISIBLE);
 
-                } else
-                    Toast.makeText(SigninRepairShopActivity.this, "안됐습니다.", Toast.LENGTH_SHORT).show();
-                guSpinner.setVisibility(Spinner.INVISIBLE);
+                } else{
+                    Toast.makeText(SigninRepairShopActivity.this, "현재는 서울 특별시만 지원됩니다.", Toast.LENGTH_SHORT).show();
+                    guSpinner.setVisibility(Spinner.INVISIBLE);
+                }
             }
 
             @Override
