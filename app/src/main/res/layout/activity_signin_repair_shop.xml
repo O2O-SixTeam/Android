@@ -77,10 +77,91 @@
             android:maxLength="13" />
 
         <TextView
-            android:id="@+id/textId"
+            android:id="@+id/textGender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/editPhone"
+            android:text="@string/gender" />
+
+        <RadioGroup
+            android:id="@+id/genderGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textGender"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/genderMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="24dp"
+                android:text="@string/male" />
+
+            <RadioButton
+                android:id="@+id/genderFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/female" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/genderGroup"
+            android:text="@string/birth" />
+
+        <EditText
+            android:id="@+id/editYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textBirth"
+            android:layout_marginRight="16dp"
+            android:hint="@string/year"
+            android:inputType="numberDecimal"
+            android:maxLength="4"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <EditText
+            android:id="@+id/editMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textBirth"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/editYear"
+            android:hint="@string/month"
+            android:inputType="numberDecimal"
+            android:maxLength="2"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <EditText
+            android:id="@+id/editDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textBirth"
+            android:layout_toRightOf="@id/editMonth"
+            android:hint="@string/day"
+            android:inputType="numberDecimal"
+            android:maxLength="2"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp" />
+
+        <TextView
+            android:id="@+id/errorBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editYear"
+            android:text="@string/alertBirth"
+            android:textColor="#FFFF0000"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/errorBirth"
             android:text="@string/id" />
 
         <EditText
@@ -210,6 +291,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textPrivate"
             android:text="@string/acceptprivate" />
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
@@ -241,6 +323,7 @@
             android:layout_marginRight="16dp"
             android:layout_toLeftOf="@id/buttonSignupCompany"
             android:text="@string/cancle" />
+
 
     </RelativeLayout>
 </ScrollView>

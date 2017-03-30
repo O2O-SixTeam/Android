@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,14 +36,21 @@ public class SigninRepairShopActivity extends AppCompatActivity {
     }
     private void setBtnSignupCompany() {
         btnSignup.setOnClickListener(v -> {
-            EditText editFamily, editGiven, editPhone, editId, editPw, editPwcheck, editCompanyName, editCompanyAddress, editCompanyIntroduction;
-            TextView alertId, alertPw, alertPwCheck;
+            EditText editFamily, editGiven, editPhone,  editBirthYear, editBirthMonth, editBirthDay,
+                        editId, editPw, editPwcheck, editCompanyName, editCompanyAddress, editCompanyIntroduction;
+
+            TextView alertBirth, alertId, alertPw, alertPwCheck;
             CheckBox personalInformation;
+            RadioGroup genderGroup;
 
             // 위젯 선언
             editFamily = (EditText)findViewById(R.id.editFamilyName);
             editGiven = (EditText)findViewById(R.id.editGivenName);
             editPhone = (EditText)findViewById(R.id.editPhone);
+            editBirthYear = (EditText)findViewById(R.id.editYear);
+            editBirthMonth = (EditText)findViewById(R.id.editMonth);
+            editBirthDay = (EditText)findViewById(R.id.editDay);
+            alertBirth = (TextView)findViewById(R.id.errorBirth);
             editId = (EditText)findViewById(R.id.editId);
             alertId = (TextView)findViewById(R.id.errorId);
             editPw = (EditText)findViewById(R.id.editPw);
@@ -50,7 +59,8 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             alertPwCheck = (TextView)findViewById(R.id.errorPwCheck);
             editCompanyName = (EditText)findViewById(R.id.editCompanyName);
             editCompanyAddress = (EditText)findViewById(R.id.editCompanyAddress);
-            editCompanyIntroduction =(EditText)findViewById(R.id.editCompanyIntroduction);
+            editCompanyIntroduction = (EditText)findViewById(R.id.editCompanyIntroduction);
+            genderGroup = (RadioGroup)findViewById(R.id.genderGroup);
             personalInformation = (CheckBox)findViewById(R.id.checkPrivate);
 
             // 전화번호 하이픈 자동 입
@@ -58,6 +68,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
 
             // 버튼 리스너
             btnSignup.setOnClickListener((v2)-> {
+                RadioButton genderButton = (RadioButton)findViewById(genderGroup.getCheckedRadioButtonId());
 
                 boolean hasError = false;
 
@@ -82,6 +93,23 @@ public class SigninRepairShopActivity extends AppCompatActivity {
                 } else {
                     hasError = true;
                     Toast.makeText(SigninRepairShopActivity.this, "폰 번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+                // 성별 체크 검사
+                if(genderButton!=null) {
+                    Log.w("Dialog Button Test", "성별 : "+genderButton.getText().toString());
+                } else {
+                    hasError = true;
+                }
+
+                // 생년월일 검사
+                if (((EditUtil.gTFE(editBirthYear).length() == 4) && (EditUtil.gTFE(editBirthMonth).length() == 2) && (EditUtil.gTFE(editBirthDay).length() == 2))) {
+                    alertBirth.setVisibility(View.GONE);
+                    Log.w("Dialog Button Test", "년 : " + EditUtil.gTFE(editBirthYear) + " 월 : " + EditUtil.gTFE(editBirthMonth) + " 일 : " + EditUtil.gTFE(editBirthDay));
+                } else {
+                    hasError = true;
+                    alertBirth.setVisibility(View.VISIBLE);
+                    TextUtil.alertTextGone(alertBirth);
                 }
 
                 // 이메일 형식 아이디 검사
@@ -113,6 +141,13 @@ public class SigninRepairShopActivity extends AppCompatActivity {
                     TextUtil.alertTextGone(alertPwCheck);
                 }
 
+                if(personalInformation.isChecked()) {
+                    Log.w("Dialog Button Test", "개인정보 : "+personalInformation.isChecked());
+                } else {
+                    hasError  = true;
+                    Toast.makeText(SigninRepairShopActivity.this, "개인 정보 수집 / 이용 내역에 동의해주세요", Toast.LENGTH_SHORT).show();
+                }
+
                 //상호명 검사
                 if(!("".equals(EditUtil.gTFE(editCompanyName)))) {
                     Log.w("Dialog Button Test", "회사명 : "+EditUtil.gTFE(editCompanyName));
@@ -139,14 +174,6 @@ public class SigninRepairShopActivity extends AppCompatActivity {
                     hasError = true;
                     Toast.makeText(SigninRepairShopActivity.this, "회사 소개를 입력해주세요", Toast.LENGTH_SHORT).show();
                 }
-                //개인정보 수집 동의
-                if(personalInformation.isChecked()) {
-                    Log.w("Dialog Button Test", "개인정보 : "+personalInformation.isChecked());
-                } else {
-                    hasError  = true;
-                    Toast.makeText(SigninRepairShopActivity.this, "개인 정보 수집 / 이용 내역에 동의해주세요", Toast.LENGTH_SHORT).show();
-                }
-
 
                 if(!hasError) {
                     // 서버로 회원정보 전송
