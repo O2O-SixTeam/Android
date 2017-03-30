@@ -77,91 +77,10 @@
             android:maxLength="13" />
 
         <TextView
-            android:id="@+id/textGender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editPhone"
-            android:text="@string/gender" />
-
-        <RadioGroup
-            android:id="@+id/genderGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textGender"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/genderMale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="24dp"
-                android:text="@string/male" />
-
-            <RadioButton
-                android:id="@+id/genderFemale"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/female" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/textBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/genderGroup"
-            android:text="@string/birth" />
-
-        <EditText
-            android:id="@+id/editYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textBirth"
-            android:layout_marginRight="16dp"
-            android:hint="@string/year"
-            android:inputType="numberDecimal"
-            android:maxLength="4"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
-
-        <EditText
-            android:id="@+id/editMonth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textBirth"
-            android:layout_marginRight="16dp"
-            android:layout_toRightOf="@id/editYear"
-            android:hint="@string/month"
-            android:inputType="numberDecimal"
-            android:maxLength="2"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
-
-        <EditText
-            android:id="@+id/editDay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textBirth"
-            android:layout_toRightOf="@id/editMonth"
-            android:hint="@string/day"
-            android:inputType="numberDecimal"
-            android:maxLength="2"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
-
-        <TextView
-            android:id="@+id/errorBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/editYear"
-            android:text="@string/alertBirth"
-            android:textColor="#FFFF0000"
-            android:visibility="gone" />
-
-        <TextView
             android:id="@+id/textId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/errorBirth"
+            android:layout_below="@id/editPhone"
             android:text="@string/id" />
 
         <EditText
@@ -277,62 +196,12 @@
             android:background="@drawable/edit_text_styling"
             android:hint="ex) My company is Really nice~" />
 
-        <Button
-            android:id="@+id/addPicture"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/editCompanyIntroduction"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="20dp"
-            android:background="@android:color/darker_gray"
-            android:text="add Picture" />
-
-        <HorizontalScrollView
-            android:id="@+id/imageScroll"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_below="@id/addPicture"
-            android:background="@drawable/edit_text_styling">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/imgView1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="20dp" />
-
-                <ImageView
-                    android:id="@+id/imgView2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="20dp" />
-
-                <ImageView
-                    android:id="@+id/imgView3"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="20dp" />
-
-                <ImageView
-                    android:id="@+id/imgView4"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginRight="20dp" />
-            </LinearLayout>
-
-        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/textPrivate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/imageScroll"
+            android:layout_below="@id/editCompanyIntroduction"
             android:text="@string/acceptprivatetext" />
 
         <CheckBox
@@ -341,6 +210,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textPrivate"
             android:text="@string/acceptprivate" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/checkPrivate"
+            android:text=" - 입점신청과 상담은 모두 무료입니다."/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:text=" - 상담센터 : 070-7683-0000"/>
 
         <Button
             android:id="@+id/buttonSignupCompany"
@@ -348,14 +230,14 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/checkPrivate"
+            android:layout_below="@id/textView2"
             android:text="@string/signup" />
 
         <Button
             android:id="@+id/buttonCancleCompany"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/checkPrivate"
+            android:layout_below="@id/textView2"
             android:layout_marginRight="16dp"
             android:layout_toLeftOf="@id/buttonSignupCompany"
             android:text="@string/cancle" />
