@@ -262,9 +262,6 @@ public class SignActivity extends AppCompatActivity {
             public void onClick(View v) {
                Intent i = new Intent(SignActivity.this, SigninRepairShopActivity.class);
                 startActivity(i);
-                /*
-                * 그냥 공업사 회원가입 액티비티인데 굳이 REORDER_TO_FRONT를 쓴 이유가 뭐죠...?
-                * */
             }
         });
     }
