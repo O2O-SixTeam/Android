@@ -235,7 +235,8 @@ public class SignActivity extends AppCompatActivity {
 
 
                 if(!hasError) {
-                    // 서버로 회원정보 전송
+                    // TODO : 서버에 신규회원 정보 전송
+
                     Toast.makeText(SignActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
                     customdialog.dismiss();
                 } else {
@@ -250,6 +251,10 @@ public class SignActivity extends AppCompatActivity {
 
     private void setBtnSignin() {
         btnSignin.setOnClickListener((v) -> {
+            boolean hasError = false;
+
+            // TODO : 아이디 비번 확인 -> 오류 시 오류 내용 TextView VISIBLE
+
             Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
             startActivity(i);
             finish();

@@ -40,8 +40,6 @@ public class WriteEstimationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_estimation);
 
-
-
         for(int i=1;i<6;i++) {
             data.add("list "+i);
         }

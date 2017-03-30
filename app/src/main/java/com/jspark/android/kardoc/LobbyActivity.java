@@ -15,16 +15,14 @@ import android.widget.Button;
 
 public class LobbyActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    Button btnEnroll;
 
+    Button btnEnroll;
+    // TODO : 수리 사례별, 파손 부위별 이미지 뷰 검색 기능 연동
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
-
-        btnEnroll = (Button)findViewById(R.id.btnEnroll);
-        btnEnroll.setOnClickListener(listener);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -37,6 +35,8 @@ public class LobbyActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        setBtnEnroll();
     }
 
     @Override
@@ -96,9 +96,13 @@ public class LobbyActivity extends AppCompatActivity
         return true;
     }
 
+    private void setBtnEnroll() {
+        btnEnroll = (Button)findViewById(R.id.btnEnroll);
+        btnEnroll.setOnClickListener(listener);
+    }
+
     View.OnClickListener listener = v -> {
         Intent intent = new Intent(LobbyActivity.this, WriteEstimationActivity.class);
         startActivity(intent);
-
     };
 }
