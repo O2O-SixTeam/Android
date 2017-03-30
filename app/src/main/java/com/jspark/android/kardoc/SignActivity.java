@@ -1,17 +1,21 @@
 package com.jspark.android.kardoc;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +40,17 @@ public class SignActivity extends AppCompatActivity {
     private EditText editId, editPw;
     private Button btnSignup, btnSignin, btnForgetPw;
 
+    private boolean leapYear = false;
+
+    Context mContext = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
+
+        mContext = SignActivity.this;
+
         // 위젯 선언
         setWidgets();
 
@@ -117,7 +128,8 @@ public class SignActivity extends AppCompatActivity {
     private void setBtnSignup() {
         btnSignup.setOnClickListener((v) -> {
 
-            EditText editFamily, editGiven, editPhone, editBirthYear, editBirthMonth, editBirthDay, editId, editPw, editPwcheck;
+            EditText editFamily, editGiven, editPhone, editId, editPw, editPwcheck;
+            Spinner yearSpinner, monthSpinner, daySpinner;
             TextView alertBirth, alertId, alertPw, alertPwCheck;
             RadioGroup genderGroup;
             CheckBox personalInformation;
@@ -131,9 +143,9 @@ public class SignActivity extends AppCompatActivity {
             editFamily = (EditText)customdialog.findViewById(R.id.editFamilyName);
             editGiven = (EditText)customdialog.findViewById(R.id.editGivenName);
             editPhone = (EditText)customdialog.findViewById(R.id.editPhone);
-            editBirthYear = (EditText)customdialog.findViewById(R.id.editYear);
-            editBirthMonth = (EditText)customdialog.findViewById(R.id.editMonth);
-            editBirthDay = (EditText)customdialog.findViewById(R.id.editDay);
+            yearSpinner = (Spinner)customdialog.findViewById(R.id.editYear);
+            monthSpinner = (Spinner)customdialog.findViewById(R.id.editMonth);
+            daySpinner = (Spinner)customdialog.findViewById(R.id.editDay);
             alertBirth = (TextView)customdialog.findViewById(R.id.errorBirth);
             editId = (EditText)customdialog.findViewById(R.id.editId);
             alertId = (TextView)customdialog.findViewById(R.id.errorId);
@@ -148,6 +160,63 @@ public class SignActivity extends AppCompatActivity {
 
             // 전화번호 하이픈 자동 입
             editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
+            // 생년월 스피너 정보
+            String[] yearData = mContext.getResources().getStringArray(R.array.yearArray);
+            String[] monthData = mContext.getResources().getStringArray(R.array.monthArray);
+            ArrayAdapter<String> yearAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, yearData);
+            ArrayAdapter<String> monthAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, monthData);
+
+            yearSpinner.setAdapter(yearAdapter);
+            monthSpinner.setAdapter(monthAdapter);
+
+            // 윤년, 월을 기준으로 28, 29, 30, 31일 세팅
+            yearSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(Integer.parseInt((String)yearSpinner.getSelectedItem())%4==0) {
+                        leapYear = true;
+                    } else {
+                        leapYear = false;
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+            monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    int getMonth = Integer.parseInt((String)monthSpinner.getSelectedItem());
+                    if(getMonth==2) {
+                        if(!leapYear) {
+                            String[] dayData = mContext.getResources().getStringArray(R.array.day28Array);
+                            ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, dayData);
+                            daySpinner.setAdapter(dayAdapter);
+                        } else {
+                            String[] dayData = mContext.getResources().getStringArray(R.array.day29Array);
+                            ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, dayData);
+                            daySpinner.setAdapter(dayAdapter);
+                        }
+                    } else if(getMonth==4||getMonth==6||getMonth==9||getMonth==11) {
+                        String[] dayData = mContext.getResources().getStringArray(R.array.day30Array);
+                        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, dayData);
+                        daySpinner.setAdapter(dayAdapter);
+                    } else {
+                        String[] dayData = mContext.getResources().getStringArray(R.array.day31Array);
+                        ArrayAdapter<String> dayAdapter = new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, dayData);
+                        daySpinner.setAdapter(dayAdapter);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
 
             // 버튼 리스너
             btnNegative.setOnClickListener((v1) -> customdialog.dismiss());
@@ -186,16 +255,23 @@ public class SignActivity extends AppCompatActivity {
                     hasError = true;
                 }
 
+                // 검사 안해도 될듯?
                 // 생년월일 검사
-                if (((EditUtil.gTFE(editBirthYear).length() == 4) && (EditUtil.gTFE(editBirthMonth).length() == 2) && (EditUtil.gTFE(editBirthDay).length() == 2))) {
-                    alertBirth.setVisibility(View.GONE);
-                    Log.w("Dialog Button Test", "년 : " + EditUtil.gTFE(editBirthYear) + " 월 : " + EditUtil.gTFE(editBirthMonth) + " 일 : " + EditUtil.gTFE(editBirthDay));
-                } else {
-                    hasError = true;
-                    alertBirth.setVisibility(View.VISIBLE);
-                    TextUtil.alertTextGone(alertBirth);
-                }
-
+//                if(SpinnerUtil.validateInteger(String.valueOf(yearSpinner.getSelectedItem()))
+//                        &&SpinnerUtil.validateInteger(String.valueOf(monthSpinner.getSelectedItem()))
+//                        &&SpinnerUtil.validateInteger(String.valueOf(daySpinner.getSelectedItem()))) {
+//                    alertBirth.setVisibility(View.GONE);
+//                    String birthDay = String.valueOf(yearSpinner.getSelectedItem())
+//                            + "-"
+//                            + String.valueOf(monthSpinner.getSelectedItem())
+//                            + "-"
+//                            + String.valueOf(daySpinner.getSelectedItem());
+//                    Log.w("Dialog Button Test", birthDay);
+//                } else {
+//                    hasError = true;
+//                    alertBirth.setVisibility(View.VISIBLE);
+//                    TextUtil.alertTextGone(alertBirth);
+//                }
 
                 // 이메일 형식 아이디 검사
                 if(SignUtil.validateEmail(EditUtil.gTFE(editId))) {

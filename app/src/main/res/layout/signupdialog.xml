@@ -96,40 +96,31 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/genderGroup"
             android:text="@string/birth"/>
-        <EditText
+        <Spinner
             android:id="@+id/editYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textBirth"
-            android:layout_marginRight="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:hint="@string/year"
-            android:inputType="numberDecimal"
-            android:maxLength="4"/>
-        <EditText
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
+        <Spinner
             android:id="@+id/editMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textBirth"
             android:layout_toRightOf="@id/editYear"
-            android:layout_marginRight="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:hint="@string/month"
-            android:inputType="numberDecimal"
-            android:maxLength="2"/>
-        <EditText
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
+        <Spinner
             android:id="@+id/editDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textBirth"
             android:layout_toRightOf="@id/editMonth"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:hint="@string/day"
-            android:inputType="numberDecimal"
-            android:maxLength="2"/>
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
         <TextView
             android:id="@+id/errorBirth"
             android:layout_width="wrap_content"

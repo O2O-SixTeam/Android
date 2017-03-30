@@ -15,8 +15,8 @@
     <string name="phone">Phone Number</string>
     <string name="examplephone">except \'-\'(hyphen)</string>
     <string name="gender">Gender</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
+    <string name="male">남성</string>
+    <string name="female">여성</string>
     <string name="birth">Birth Day</string>
     <string name="year">YYYY</string>
     <string name="month">MM</string>
