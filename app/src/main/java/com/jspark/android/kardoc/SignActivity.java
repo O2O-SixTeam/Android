@@ -338,12 +338,9 @@ public class SignActivity extends AppCompatActivity {
     }
 
     private void setSigninRepairShop(){
-        signinRepairShop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               Intent i = new Intent(SignActivity.this, SigninRepairShopActivity.class);
-                startActivity(i);
-            }
+        signinRepairShop.setOnClickListener(v -> {
+           Intent i = new Intent(SignActivity.this, SigninRepairShopActivity.class);
+            startActivity(i);
         });
     }
 }

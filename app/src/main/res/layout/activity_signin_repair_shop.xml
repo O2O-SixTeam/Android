@@ -111,42 +111,31 @@
             android:layout_below="@id/genderGroup"
             android:text="@string/birth" />
 
-        <EditText
+        <Spinner
             android:id="@+id/editYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textBirth"
-            android:layout_marginRight="16dp"
-            android:hint="@string/year"
-            android:inputType="numberDecimal"
-            android:maxLength="4"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
-
-        <EditText
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
+        <Spinner
             android:id="@+id/editMonth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textBirth"
-            android:layout_marginRight="16dp"
             android:layout_toRightOf="@id/editYear"
-            android:hint="@string/month"
-            android:inputType="numberDecimal"
-            android:maxLength="2"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
-
-        <EditText
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
+        <Spinner
             android:id="@+id/editDay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textBirth"
             android:layout_toRightOf="@id/editMonth"
-            android:hint="@string/day"
-            android:inputType="numberDecimal"
-            android:maxLength="2"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp" />
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
 
         <TextView
             android:id="@+id/errorBirth"
@@ -254,13 +243,35 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/editCompanyName"
             android:text="Comapny Address" />
+        <Spinner
+            android:id="@+id/citySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/companyAddress"
+            android:layout_marginRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:entries="@array/city"
+            />
+
+        <Spinner
+            android:id="@+id/guSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/companyAddress"
+            android:layout_marginRight="8dp"
+            android:layout_toRightOf="@+id/citySpinner"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:visibility="invisible" />
+
 
         <EditText
             android:id="@+id/editCompanyAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/companyAddress"
-            android:hint="ex) Seoul Gangnam" />
+            android:layout_below="@id/citySpinner"
+            android:hint="ex) 나머지 주소를 입력해주세요." />
 
         <TextView
             android:id="@+id/companyIntroduction"
