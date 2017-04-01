@@ -255,23 +255,7 @@ public class SignActivity extends AppCompatActivity {
                     hasError = true;
                 }
 
-                // 검사 안해도 될듯?
-                // 생년월일 검사
-//                if(SpinnerUtil.validateInteger(String.valueOf(yearSpinner.getSelectedItem()))
-//                        &&SpinnerUtil.validateInteger(String.valueOf(monthSpinner.getSelectedItem()))
-//                        &&SpinnerUtil.validateInteger(String.valueOf(daySpinner.getSelectedItem()))) {
-//                    alertBirth.setVisibility(View.GONE);
-//                    String birthDay = String.valueOf(yearSpinner.getSelectedItem())
-//                            + "-"
-//                            + String.valueOf(monthSpinner.getSelectedItem())
-//                            + "-"
-//                            + String.valueOf(daySpinner.getSelectedItem());
-//                    Log.w("Dialog Button Test", birthDay);
-//                } else {
-//                    hasError = true;
-//                    alertBirth.setVisibility(View.VISIBLE);
-//                    TextUtil.alertTextGone(alertBirth);
-//                }
+                // 생년월일은 스피너로 특정 값만 넣을 수 있게 했으므로 검사하지 않는다
 
                 // 이메일 형식 아이디 검사
                 if(SignUtil.validateEmail(EditUtil.gTFE(editId))) {
