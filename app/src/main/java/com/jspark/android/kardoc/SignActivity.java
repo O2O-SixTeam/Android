@@ -31,6 +31,9 @@ import com.jspark.android.kardoc.util.TextUtil;
 
 import java.util.Arrays;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SignActivity extends AppCompatActivity {
 
     private LoginButton signinFacebook;
@@ -51,6 +54,8 @@ public class SignActivity extends AppCompatActivity {
 
         mContext = SignActivity.this;
 
+
+
         // 위젯 선언
         setWidgets();
 
@@ -66,6 +71,13 @@ public class SignActivity extends AppCompatActivity {
 
         //공업사 로그인 기능
         setSigninRepairShop();
+    }
+
+    private void setRetrofit() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://ec2-13-124-46-207.ap-northeast-2.compute.amazonaws.com:8000/user/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
     }
 
     private void setCallbackManager() {
