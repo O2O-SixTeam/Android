@@ -3,7 +3,6 @@ package com.jspark.android.kardoc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -103,8 +102,9 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         // 위젯 선언
 
 
-        // 전화번호 하이픈 자동 입
-        editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+        // 전화번호에 하이픈 없이 달라고 함
+        // 전화번호 하이픈 자동 입력
+        //editPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
     }
 
     private void setBtnSignupCompany() {
@@ -211,7 +211,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             }
 
             // 핸드폰 번호 검사
-            if (EditUtil.gTFE(editPhone).length() == 13) {
+            if (EditUtil.gTFE(editPhone).length() == 11) {
                 Log.w("Dialog Button Test", "폰 : " + EditUtil.gTFE(editPhone));
             } else {
                 hasError = true;
@@ -301,7 +301,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
                 remoteData.enqueue(new Callback<Result>() {
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
-
+                        Log.w("shopResult", response.toString());
                         if(response.code()==201&&response.body()!=null) {
                             Intent i = new Intent(SigninRepairShopActivity.this, LobbyActivity.class);
                             startActivity(i);
