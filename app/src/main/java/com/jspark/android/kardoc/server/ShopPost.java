@@ -15,7 +15,7 @@ import retrofit2.http.POST;
 public interface ShopPost {
     @Headers("Content-Type:application/json")
     @POST("shop/")
-    Call<Result> createUser(
+    Call<Result> createShop(
             @Body Shop shop
     );
 }

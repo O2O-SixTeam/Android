@@ -17,11 +17,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jspark.android.kardoc.domain.Result;
+import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.server.ShopPost;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.SignUtil;
 import com.jspark.android.kardoc.util.TextUtil;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -186,13 +191,15 @@ public class SigninRepairShopActivity extends AppCompatActivity {
 
         btnSignup.setOnClickListener(v -> {
             RadioButton genderButton = (RadioButton) findViewById(genderGroup.getCheckedRadioButtonId());
+            String ownerData = "";
+            String shopName = "";
             boolean hasError = false;
 
             // 성, 이름 검사
-            if (!("".equals(EditUtil.gTFE(editFamily)))) {
-                Log.w("Dialog Button Test", "성 : " + EditUtil.gTFE(editFamily));
-                if (!("".equals(EditUtil.gTFE(editGiven)))) {
-                    Log.w("Dialog Button Test", "이름 : " + EditUtil.gTFE(editGiven));
+            if(!("".equals(EditUtil.gTFE(editFamily)))) {
+                if(!("".equals(EditUtil.gTFE(editGiven)))) {
+                    ownerData = EditUtil.gTFE(editFamily)+EditUtil.gTFE(editGiven);
+                    Log.w("Dialog Button Test", "Name : "+ownerData);
                 } else {
                     hasError = true;
                     editGiven.requestFocus();
@@ -257,6 +264,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
 
             //상호명 검사
             if (!("".equals(EditUtil.gTFE(editCompanyName)))) {
+                shopName = EditUtil.gTFE(editCompanyName);
                 Log.w("Dialog Button Test", "회사명 : " + EditUtil.gTFE(editCompanyName));
 
             } else {
@@ -284,10 +292,30 @@ public class SigninRepairShopActivity extends AppCompatActivity {
 
             if (!hasError) {
                 // 서버로 회원정보 전송
-                Intent i = new Intent(SigninRepairShopActivity.this, LobbyActivity.class);
-                startActivity(i);
-                Toast.makeText(SigninRepairShopActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
-                finish();
+                Shop shop = new Shop();
+                shop.setOwner(ownerData);
+                shop.setShopname(shopName);
+
+                Call<Result> remoteData = shopPost.createShop(shop);
+
+                remoteData.enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+
+                        if(response.code()==201&&response.body()!=null) {
+                            Intent i = new Intent(SigninRepairShopActivity.this, LobbyActivity.class);
+                            startActivity(i);
+                            Toast.makeText(SigninRepairShopActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+
+                    }
+                });
+
             } else {
 
             }
