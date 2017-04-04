@@ -110,7 +110,7 @@ public class SignActivity extends AppCompatActivity {
                     startActivity(i);
                 });
                 Bundle parameters = new Bundle();
-                parameters.putString("fields", "id,name,email,gender,birthday");
+                parameters.putString("fields", "id,name,email");
                 graphRequest.setParameters(parameters);
                 graphRequest.executeAsync();
             }

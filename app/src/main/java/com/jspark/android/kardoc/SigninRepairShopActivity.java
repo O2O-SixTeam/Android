@@ -17,13 +17,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jspark.android.kardoc.server.ShopPost;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.SignUtil;
 import com.jspark.android.kardoc.util.TextUtil;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class SigninRepairShopActivity extends AppCompatActivity {
     Button btnCancle;
     Button btnSignup;
+    ShopPost shopPost = null;
 
     //
     EditText editFamily, editGiven, editPhone, editId, editPw, editPwcheck, editCompanyName, editCompanyAddress, editCompanyIntroduction;
@@ -51,11 +56,21 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         cityNames = this.getResources().getStringArray(R.array.city);
         guNames = this.getResources().getStringArray(R.array.seoul_gu);
 
+        // 레트로핏 연결
+        setRetrofitInShop();
 
         setWidget();
         setBtnSignupCompany();
         setBtnCancle();
 
+    }
+
+    private void setRetrofitInShop() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://ec2-13-124-46-207.ap-northeast-2.compute.amazonaws.com:8000/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        shopPost = retrofit.create(ShopPost.class);
     }
 
     private void setWidget() {
@@ -96,13 +111,13 @@ public class SigninRepairShopActivity extends AppCompatActivity {
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectCity =  cityNames[position];
+                String selectCity = cityNames[position];
                 if (selectCity.equals("서울특별시")) {
 
                     Toast.makeText(SigninRepairShopActivity.this, "선택 되었습니다.", Toast.LENGTH_SHORT).show();
                     guSpinner.setVisibility(Spinner.VISIBLE);
 
-                } else{
+                } else {
                     Toast.makeText(SigninRepairShopActivity.this, "현재는 서울 특별시만 지원됩니다.", Toast.LENGTH_SHORT).show();
                     guSpinner.setVisibility(Spinner.INVISIBLE);
                 }
@@ -134,7 +149,8 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         monthSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -164,7 +180,8 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) { }
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
 
         btnSignup.setOnClickListener(v -> {
