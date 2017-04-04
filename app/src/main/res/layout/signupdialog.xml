@@ -64,8 +64,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textPhone"
             android:hint="@string/examplephone"
-            android:inputType="phone"
-            android:maxLength="13"/>
+            android:inputType="numberSigned"
+            android:digits="0123456789"
+            android:maxLength="11"/>
         <TextView
             android:id="@+id/textGender"
             android:layout_width="wrap_content"
