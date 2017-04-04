@@ -341,10 +341,10 @@ public class SignActivity extends AppCompatActivity {
                     user.setGender(genderData);
                     user.setEmail(emailData);
                     user.setBirth(birthData);
-                    user.setCustomID(emailData);
+                    user.setCustomid(emailData);
                     user.setPassword(passwordData);
 
-                    Log.w("user", user.getName()+user.getPhone()+user.getGender()+user.getEmail()+user.getBirth()+user.getCustomID()+user.getPassword());
+                    Log.w("user", user.getName()+user.getPhone()+user.getGender()+user.getEmail()+user.getBirth()+user.getCustomid()+user.getPassword());
 
                     Call<Result> remoteData = userPost.createUser(user);
 

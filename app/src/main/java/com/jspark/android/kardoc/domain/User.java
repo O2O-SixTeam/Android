@@ -10,7 +10,7 @@ public class User {
     private String gender;
     private String email;
     private String birth;
-    private String CustomID;
+    private String customid;
     private String password;
 
     public String getName() {
@@ -53,12 +53,12 @@ public class User {
         this.birth = birth;
     }
 
-    public String getCustomID() {
-        return CustomID;
+    public String getCustomid() {
+        return customid;
     }
 
-    public void setCustomID(String customID) {
-        CustomID = customID;
+    public void setCustomid(String customid) {
+        this.customid = customid;
     }
 
     public String getPassword() {
