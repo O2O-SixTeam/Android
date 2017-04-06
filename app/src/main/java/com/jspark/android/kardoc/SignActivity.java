@@ -357,7 +357,8 @@ public class SignActivity extends AppCompatActivity {
                                     // 토큰 저장
                                     SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
                                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    editor.putString("token", response.body().getToken());
+                                    String customId = EditUtil.gTFE(editId);
+                                    editor.putString("token"+customId, response.body().getToken());
                                     editor.commit();
                                     customdialog.dismiss();
                                 }
@@ -407,9 +408,11 @@ public class SignActivity extends AppCompatActivity {
                 TextUtil.alertTextGone(alertPw);
             }
 
-            SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-            String token = sharedPreferences.getString("token", "null");
-            Log.w("token", token);
+            if(!hasError) {
+                SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+                String token = sharedPreferences.getString("token" + myId, "null");
+                Log.w("token", token);
+            }
 
 //            Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
 //            startActivity(i);
