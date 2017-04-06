@@ -3,6 +3,7 @@ package com.jspark.android.kardoc;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -60,6 +61,8 @@ public class SignActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign);
 
         mContext = SignActivity.this;
+
+
 
         // 레트로핏 연결
         setRetrofit();
@@ -344,18 +347,18 @@ public class SignActivity extends AppCompatActivity {
                     user.setCustomid(emailData);
                     user.setPassword(passwordData);
 
-                    Log.w("user", user.getName()+user.getPhone()+user.getGender()+user.getEmail()+user.getBirth()+user.getCustomid()+user.getPassword());
-
                     Call<Result> remoteData = userPost.createUser(user);
 
                     remoteData.enqueue(new Callback<Result>() {
                         @Override
                         public void onResponse(Call<Result> call, Response<Result> response) {
                             try {
-                                Log.d("response", response.toString());
                                 if(response.code()==201&&response.body()!=null) {
-                                    Log.d("SignUp Success", "SignUp Success!!!!");
-                                    Toast.makeText(SignActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
+                                    // 토큰 저장
+                                    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("token", response.body().getToken());
+                                    editor.commit();
                                     customdialog.dismiss();
                                 }
                             } catch(Exception e) {
@@ -383,12 +386,34 @@ public class SignActivity extends AppCompatActivity {
     private void setBtnSignin() {
         btnSignin.setOnClickListener((v) -> {
             boolean hasError = false;
+            String myId="", myPw="";
 
             // TODO : 아이디 비번 확인 -> 오류 시 오류 내용 TextView VISIBLE
+            if(SignUtil.validateEmail(EditUtil.gTFE(editId))) {
+                alertId.setVisibility(View.GONE);
+                myId = EditUtil.gTFE(editId);
+            } else {
+                hasError = true;
+                alertId.setVisibility(View.VISIBLE);
+                TextUtil.alertTextGone(alertId);
+            }
 
-            Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
-            startActivity(i);
-            finish();
+            if(SignUtil.validatePassword(EditUtil.gTFE(editPw))) {
+                alertPw.setVisibility(View.GONE);
+                myPw = EditUtil.gTFE(editPw);
+            } else {
+                hasError = true;
+                alertPw.setVisibility(View.VISIBLE);
+                TextUtil.alertTextGone(alertPw);
+            }
+
+            SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+            String token = sharedPreferences.getString("token", "null");
+            Log.w("token", token);
+
+//            Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
+//            startActivity(i);
+//            finish();
         });
     }
 
