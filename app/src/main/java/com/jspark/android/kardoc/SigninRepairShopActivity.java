@@ -1,6 +1,8 @@
 package com.jspark.android.kardoc;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.jspark.android.kardoc.domain.Result;
 import com.jspark.android.kardoc.domain.Shop;
+import com.jspark.android.kardoc.domain.User;
 import com.jspark.android.kardoc.server.ShopPost;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.SignUtil;
@@ -46,6 +49,7 @@ public class SigninRepairShopActivity extends AppCompatActivity {
     String[] cityNames;
     String[] guNames;
     //
+    String shopName = "";
 
     private boolean leapYear = false;
 
@@ -191,15 +195,24 @@ public class SigninRepairShopActivity extends AppCompatActivity {
 
         btnSignup.setOnClickListener(v -> {
             RadioButton genderButton = (RadioButton) findViewById(genderGroup.getCheckedRadioButtonId());
-            String ownerData = "";
-            String shopName = "";
+            //RepairShop
+
+
+            // User
+            String nameData = "";
+            String phoneData = "";
+            String genderData = "";
+            String birthData = "";
+            String emailData = "";
+            String passwordData = "";
+
             boolean hasError = false;
 
             // 성, 이름 검사
             if(!("".equals(EditUtil.gTFE(editFamily)))) {
                 if(!("".equals(EditUtil.gTFE(editGiven)))) {
-                    ownerData = EditUtil.gTFE(editFamily)+EditUtil.gTFE(editGiven);
-                    Log.w("Dialog Button Test", "Name : "+ownerData);
+                    nameData = EditUtil.gTFE(editFamily)+EditUtil.gTFE(editGiven);
+                    Log.w("Dialog Button Test", "Name : "+nameData);
                 } else {
                     hasError = true;
                     editGiven.requestFocus();
@@ -291,9 +304,17 @@ public class SigninRepairShopActivity extends AppCompatActivity {
             }
 
             if (!hasError) {
-                // 서버로 회원정보 전송
+                //먼저 로그인
+                User user = new User();
+                user.setName(nameData);
+                user.setPhone(phoneData);
+                user.setGender(genderData);
+                user.setEmail(emailData);
+                user.setBirth(birthData);
+                user.setCustomid(emailData);
+                user.setPassword(passwordData);
+
                 Shop shop = new Shop();
-                shop.setOwner(ownerData);
                 shop.setShopname(shopName);
 
                 Call<Result> remoteData = shopPost.createShop(shop);
@@ -301,12 +322,20 @@ public class SigninRepairShopActivity extends AppCompatActivity {
                 remoteData.enqueue(new Callback<Result>() {
                     @Override
                     public void onResponse(Call<Result> call, Response<Result> response) {
-                        Log.w("shopResult", response.toString());
-                        if(response.code()==201&&response.body()!=null) {
+                        // 토큰 저장
+                        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        String customId = EditUtil.gTFE(editId);
+                        editor.putString("token"+customId, response.body().getToken());
+                        editor.commit();
+
+                        if(shopName!=null) {
                             Intent i = new Intent(SigninRepairShopActivity.this, LobbyActivity.class);
                             startActivity(i);
                             Toast.makeText(SigninRepairShopActivity.this, "전송 성공", Toast.LENGTH_SHORT).show();
                             finish();
+                        }else {
+                            Toast.makeText(SigninRepairShopActivity.this, "공업사 가입 실패.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
