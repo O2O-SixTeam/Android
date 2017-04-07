@@ -76,13 +76,15 @@ public class LobbyActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent;
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_estimation) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_myPage) {
 
-        } else if (id == R.id.nav_slideshow) {
-
+        } else if (id == R.id.nav_requestShop) {
+            intent = new Intent(LobbyActivity.this, RepairShopMainActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -90,7 +92,6 @@ public class LobbyActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

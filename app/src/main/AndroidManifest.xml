@@ -35,7 +35,8 @@
         <activity android:name=".WarrentyActivity" />
         <activity android:name=".CallEstimationActivity" />
         <activity android:name=".BrandActivity" />
-        <activity android:name=".SigninRepairShopActivity"></activity>
+        <activity android:name=".SigninRepairShopActivity" />
+        <activity android:name=".RepairShopMainActivity"></activity>
     </application>
 
 </manifest>
