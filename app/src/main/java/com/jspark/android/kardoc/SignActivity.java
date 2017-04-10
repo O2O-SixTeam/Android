@@ -34,6 +34,7 @@ import com.jspark.android.kardoc.util.TextUtil;
 
 import java.util.Arrays;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -62,8 +63,6 @@ public class SignActivity extends AppCompatActivity {
 
         mContext = SignActivity.this;
 
-
-
         // 레트로핏 연결
         setRetrofit();
 
@@ -86,7 +85,7 @@ public class SignActivity extends AppCompatActivity {
 
     private void setRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://ec2-13-124-46-207.ap-northeast-2.compute.amazonaws.com:8000/")
+                .baseUrl("http://www.kardoc.kr/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         userPost = retrofit.create(UserPost.class);
@@ -347,19 +346,14 @@ public class SignActivity extends AppCompatActivity {
                     user.setCustomid(emailData);
                     user.setPassword(passwordData);
 
-                    Call<Result> remoteData = userPost.createUser(user);
+                    Call<ResponseBody> remoteData = userPost.createUser(user);
 
-                    remoteData.enqueue(new Callback<Result>() {
+                    remoteData.enqueue(new Callback<ResponseBody>() {
                         @Override
-                        public void onResponse(Call<Result> call, Response<Result> response) {
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.w("create user response", response.toString());
                             try {
                                 if(response.code()==201&&response.body()!=null) {
-                                    // 토큰 저장
-                                    SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-                                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                                    String customId = EditUtil.gTFE(editId);
-                                    editor.putString("token"+customId, response.body().getToken());
-                                    editor.commit();
                                     customdialog.dismiss();
                                 }
                             } catch(Exception e) {
@@ -368,7 +362,7 @@ public class SignActivity extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<Result> call, Throwable t) {
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
 
                         }
                     });
@@ -389,7 +383,6 @@ public class SignActivity extends AppCompatActivity {
             boolean hasError = false;
             String myId="", myPw="";
 
-            // TODO : 아이디 비번 확인 -> 오류 시 오류 내용 TextView VISIBLE
             if(SignUtil.validateEmail(EditUtil.gTFE(editId))) {
                 alertId.setVisibility(View.GONE);
                 myId = EditUtil.gTFE(editId);
@@ -410,13 +403,43 @@ public class SignActivity extends AppCompatActivity {
 
             if(!hasError) {
                 SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-                String token = sharedPreferences.getString("token" + myId, "null");
-                Log.w("token", token);
-            }
 
-//            Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
-//            startActivity(i);
-//            finish();
+                // 이전의 토큰 값 보기
+                String originalToken = sharedPreferences.getString("token" + myId, "null");
+                Log.w("Original Token", originalToken);
+
+                String userName = myId;
+
+                // 토큰 받아오기
+                Call<Result> loginData = userPost.loginUser(myId, myPw);
+                Log.w("id / pw", myId+" / "+myPw);
+                loginData.enqueue(new Callback<Result>() {
+                    @Override
+                    public void onResponse(Call<Result> call, Response<Result> response) {
+                        Log.w("login response", response.toString());
+
+                        if(response.code()==200) {
+                            Log.w("token get", response.body().getToken());
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("token" + userName, response.body().getToken());
+                            editor.commit();
+                            Log.w("token shared", sharedPreferences.getString("token" + userName, "null"));
+
+                            Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
+                            startActivity(i);
+                            finish();
+                        } else {
+                            Toast.makeText(SignActivity.this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Result> call, Throwable t) {
+
+                    }
+                });
+            }
         });
     }
 
