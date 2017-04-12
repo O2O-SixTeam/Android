@@ -6,8 +6,66 @@ package com.jspark.android.kardoc.domain;
 
 public class Shop {
     private String shopname;
+    private String address;
+    private String zone;
+    private String detail;
+    private String number;
+    private String longitude;
+    private String latitude;
 
-    public String getShopname() { return shopname; }
+    public String getShopname() {
+        return shopname;
+    }
 
-    public void setShopname(String shopname) { this.shopname = shopname; }
+    public void setShopname(String shopname) {
+        this.shopname = shopname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getZone() {
+        return zone;
+    }
+
+    public void setZone(String zone) {
+        this.zone = zone;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 }

@@ -24,7 +24,8 @@
         </activity>
         <activity
             android:name=".WriteEstimationActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".SignActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -35,8 +36,9 @@
         <activity android:name=".WarrentyActivity" />
         <activity android:name=".CallEstimationActivity" />
         <activity android:name=".BrandActivity" />
-        <activity android:name=".SigninRepairShopActivity" />
-        <activity android:name=".RepairShopMainActivity"></activity>
+        <activity android:name=".SignupRepairShopActivity" />
+        <activity android:name=".RepairShopMainActivity" />
+        <activity android:name=".CaseActivity"/>
     </application>
 
 </manifest>

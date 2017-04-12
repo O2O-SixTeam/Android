@@ -6,7 +6,9 @@ package com.jspark.android.kardoc.domain;
 
 public class Result {
     String token;
+    String non_field_errors;
     public String getToken(){
         return token;
     }
+    public String getNon_field_errors() { return non_field_errors; }
 }

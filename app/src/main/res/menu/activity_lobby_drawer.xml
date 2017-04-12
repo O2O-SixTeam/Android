@@ -20,12 +20,12 @@
             android:title="Settings" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Repair Shop Menus">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/createShop"
+                android:icon="@mipmap/repair_shop"
+                android:title="@string/createShop" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

@@ -70,26 +70,8 @@
         <item>1996</item>
         <item>1997</item>
         <item>1998</item>
-        <item>1999</item>
-        <item>2000</item>
-        <item>2001</item>
-        <item>2002</item>
-        <item>2003</item>
-        <item>2004</item>
-        <item>2005</item>
-        <item>2006</item>
-        <item>2007</item>
-        <item>2008</item>
-        <item>2009</item>
-        <item>2010</item>
-        <item>2011</item>
-        <item>2012</item>
-        <item>2013</item>
-        <item>2014</item>
-        <item>2015</item>
-        <item>2016</item>
-        <item>2017</item>
     </string-array>
+
     <string-array name="monthArray">
         <item>01</item>
         <item>02</item>
@@ -104,6 +86,7 @@
         <item>11</item>
         <item>12</item>
     </string-array>
+
     <string-array name="day28Array">
         <item>01</item>
         <item>02</item>
@@ -134,6 +117,7 @@
         <item>27</item>
         <item>28</item>
     </string-array>
+
     <string-array name="day29Array">
         <item>01</item>
         <item>02</item>
@@ -165,6 +149,7 @@
         <item>28</item>
         <item>29</item>
     </string-array>
+
     <string-array name="day30Array">
         <item>01</item>
         <item>02</item>
@@ -197,6 +182,7 @@
         <item>29</item>
         <item>30</item>
     </string-array>
+
     <string-array name="day31Array">
         <item>01</item>
         <item>02</item>
@@ -230,6 +216,7 @@
         <item>30</item>
         <item>31</item>
     </string-array>
+
     <string-array name="city">
         <item>시</item>
         <item>서울특별시</item>
@@ -249,10 +236,8 @@
         <item>제주도</item>
         <item>전라남도</item>
         <item>세종시</item>
-
-
-
     </string-array>
+
     <string-array name="seoul_gu">
         <item>구</item>
         <item>강남구</item>
@@ -283,4 +268,17 @@
         <item>은평구</item>
     </string-array>
 
+    <string-array name="parts">
+        <item>펜더</item>
+        <item>범퍼</item>
+        <item>도어</item>
+        <item>유리</item>
+        <item>A 필러</item>
+        <item>B 필러</item>
+        <item>C 필러</item>
+        <item>본넷</item>
+        <item>루프 판넬</item>
+        <item>트렁크</item>
+        <item>휠하우스</item>
+    </string-array>
 </resources>

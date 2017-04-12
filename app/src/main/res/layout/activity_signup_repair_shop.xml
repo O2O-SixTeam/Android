@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context="com.jspark.android.kardoc.SignupRepairShopActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/signupShop"
+            android:textSize="25sp" />
+        <TextView
+            android:id="@+id/textShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textSignup"
+            android:text="@string/shopname" />
+        <EditText
+            android:id="@+id/editShopName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/textShopName"
+            android:layout_below="@id/textShopName"
+            android:hint="@string/shopnameHint"
+            android:inputType="text"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/textShopNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editShopName"
+            android:text="@string/shopnumber" />
+        <EditText
+            android:id="@+id/editShopNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/textShopNumber"
+            android:layout_below="@id/textShopNumber"
+            android:hint="@string/shopnumberHint"
+            android:inputType="numberDecimal"
+            android:digits="1234567890"
+            android:maxLines="1"/>
+
+        <WebView
+            android:id="@+id/zipCodeWebView"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/editShopNumber">
+        </WebView>
+
+        <TextView
+            android:id="@+id/zipCodeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/zipCodeWebView"
+            android:text="test"/>
+
+        <EditText
+            android:id="@+id/editDetialAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/zipCodeText"
+            android:maxLines="1"
+            android:hint="ex) 나머지 주소를 입력해주세요." />
+
+        <TextView
+            android:id="@+id/companyIntroduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editDetialAddress"
+            android:text="Company Introduction" />
+
+        <EditText
+            android:id="@+id/editCompanyIntroduction"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/companyIntroduction"
+            android:background="@drawable/edit_text_styling"
+            android:hint="ex) My company is Really nice~" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCompanyIntroduction"
+            android:text=" - 입점신청과 상담은 모두 무료입니다."/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView1"
+            android:text=" - 상담센터 : 070-7683-0000"/>
+
+        <Button
+            android:id="@+id/buttonSignupCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/textView2"
+            android:text="@string/signup" />
+
+        <Button
+            android:id="@+id/buttonCancleCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView2"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@id/buttonSignupCompany"
+            android:text="@string/cancle" />
+
+
+    </RelativeLayout>
+</ScrollView>

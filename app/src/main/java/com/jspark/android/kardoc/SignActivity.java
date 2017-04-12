@@ -27,7 +27,7 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.jspark.android.kardoc.domain.Result;
 import com.jspark.android.kardoc.domain.User;
-import com.jspark.android.kardoc.server.UserPost;
+import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.SignUtil;
 import com.jspark.android.kardoc.util.TextUtil;
@@ -43,6 +43,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignActivity extends AppCompatActivity {
 
+    public static final String myToken = "myToken";
+
     private LoginButton signinFacebook;
     private CallbackManager callbackManager;
 
@@ -54,7 +56,7 @@ public class SignActivity extends AppCompatActivity {
 
     Context mContext = null;
 
-    UserPost userPost = null;
+    ApiServices apiServices = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +90,7 @@ public class SignActivity extends AppCompatActivity {
                 .baseUrl("http://www.kardoc.kr/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        userPost = retrofit.create(UserPost.class);
+        apiServices = retrofit.create(ApiServices.class);
     }
 
     private void setCallbackManager() {
@@ -164,7 +166,7 @@ public class SignActivity extends AppCompatActivity {
 
             // 위젯 선언
             editFamily = (EditText)customdialog.findViewById(R.id.editFamilyName);
-            editGiven = (EditText)customdialog.findViewById(R.id.editGivenName);
+            editGiven = (EditText)customdialog.findViewById(R.id.editShopName);
             editPhone = (EditText)customdialog.findViewById(R.id.editPhone);
             yearSpinner = (Spinner)customdialog.findViewById(R.id.editYear);
             monthSpinner = (Spinner)customdialog.findViewById(R.id.editMonth);
@@ -346,7 +348,7 @@ public class SignActivity extends AppCompatActivity {
                     user.setCustomid(emailData);
                     user.setPassword(passwordData);
 
-                    Call<ResponseBody> remoteData = userPost.createUser(user);
+                    Call<ResponseBody> remoteData = apiServices.createUser(user);
 
                     remoteData.enqueue(new Callback<ResponseBody>() {
                         @Override
@@ -402,7 +404,7 @@ public class SignActivity extends AppCompatActivity {
             }
 
             if(!hasError) {
-                SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(myToken, Context.MODE_PRIVATE);
 
                 // 이전의 토큰 값 보기
                 String originalToken = sharedPreferences.getString("token" + myId, "null");
@@ -411,7 +413,7 @@ public class SignActivity extends AppCompatActivity {
                 String userName = myId;
 
                 // 토큰 받아오기
-                Call<Result> loginData = userPost.loginUser(myId, myPw);
+                Call<Result> loginData = apiServices.loginUser(myId, myPw);
                 Log.w("id / pw", myId+" / "+myPw);
                 loginData.enqueue(new Callback<Result>() {
                     @Override
@@ -422,8 +424,10 @@ public class SignActivity extends AppCompatActivity {
                             Log.w("token get", response.body().getToken());
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("token" + userName, response.body().getToken());
+                            editor.putString(myToken, response.body().getToken());
                             editor.commit();
                             Log.w("token shared", sharedPreferences.getString("token" + userName, "null"));
+                            Log.w("token mine", sharedPreferences.getString(myToken, "null"));
 
                             Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
                             startActivity(i);
@@ -431,7 +435,6 @@ public class SignActivity extends AppCompatActivity {
                         } else {
                             Toast.makeText(SignActivity.this, "아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show();
                         }
-
                     }
 
                     @Override
@@ -445,7 +448,7 @@ public class SignActivity extends AppCompatActivity {
 
     private void setSigninRepairShop(){
         signinRepairShop.setOnClickListener(v -> {
-           Intent i = new Intent(SignActivity.this, SigninRepairShopActivity.class);
+           Intent i = new Intent(SignActivity.this, SignupRepairShopActivity.class);
             startActivity(i);
         });
     }

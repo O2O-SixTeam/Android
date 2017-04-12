@@ -2,11 +2,16 @@ package com.jspark.android.kardoc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -23,13 +28,18 @@ public class WriteEstimationActivity extends AppCompatActivity {
 
     LinearLayout linear;
     Spinner spinnerOrg;
-    Button btnAdd, btnFin, btnDel;
-    Button btnBrend, btnCallEstimation, btnWarranty;
-
     TextView textResult; //스피너의 값
 
+    Button btnAdd, btnFin, btnDel;
+    Button btnBrand, btnCallEstimation, btnWarranty;
+
+    EditText carNameField, carNumberField, carVinField, phoneNumberField;
+    WebView addressField;
+    TextView addressTest;
+    Handler handler;
+
     List<Spinner> spinners = new ArrayList<>();
-    List<String> data = new ArrayList<>();
+    String[] partsData;
     ArrayAdapter<String> adapter;
 
     final int viewPreId = 5350;
@@ -40,102 +50,118 @@ public class WriteEstimationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write_estimation);
 
-        for(int i=1;i<6;i++) {
-            data.add("list "+i);
-        }
+        setWidgets();
 
+        partsData = getResources().getStringArray(R.array.parts);
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, partsData);
+
+        spinnerOrg.setAdapter(adapter);
+
+        initWebView();
+        handler = new Handler();
+
+        setButtonAdd();
+        setButtonFinish();
+        setButtonDelete();
+
+        btnBrand.setOnClickListener(listener);
+        btnCallEstimation.setOnClickListener(listener);
+        btnWarranty.setOnClickListener(listener);
+
+    }
+
+    View.OnClickListener listener = v -> {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.btnBrend:
+                intent = new Intent(WriteEstimationActivity.this, BrandActivity.class );
+                startActivity(intent);
+                break;
+            case R.id.btnCallEstimation:
+                intent = new Intent(WriteEstimationActivity.this,CallEstimationActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnWarranty:
+                intent = new Intent(WriteEstimationActivity.this,WarrentyActivity.class);
+                startActivity(intent);
+                break;
+        }
+    };
+
+    private void setWidgets() {
         linear = (LinearLayout)findViewById(R.id.linearLayout);
         spinnerOrg = (Spinner)findViewById(R.id.spinnerOriginal);
         spinners.add(spinnerOrg);
         btnAdd = (Button)findViewById(R.id.btnAdd);
         btnFin = (Button)findViewById(R.id.btnFinish);
         btnDel = (Button)findViewById(R.id.btnDelete);
-
-        btnBrend =  (Button)findViewById(R.id.btnBrend);
+        carNameField = (EditText)findViewById(R.id.editCarName);
+        carNumberField = (EditText)findViewById(R.id.editCarNum);
+        carVinField = (EditText)findViewById(R.id.editVinNum);
+        phoneNumberField = (EditText)findViewById(R.id.editPhoneNumber);
+        btnBrand =  (Button)findViewById(R.id.btnBrend);
         btnCallEstimation = (Button)findViewById(R.id.btnCallEstimation);
         btnWarranty = (Button)findViewById(R.id.btnWarranty);
         textResult = (TextView)findViewById(R.id.textResult);
-
-
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);
-
-        spinnerOrg.setAdapter(adapter);
-
-        setButtonAdd();
-        setButtonFinish();
-        setButtonDelete();
-
-        btnBrend.setOnClickListener(listener);
-        btnCallEstimation.setOnClickListener(listener);
-        btnWarranty.setOnClickListener(listener);
-
+        addressTest = (TextView)findViewById(R.id.webViewTestText);
     }
-    View.OnClickListener listener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent;
-            switch (v.getId()){
-                case R.id.btnBrend:
-                    intent = new Intent(WriteEstimationActivity.this, BrandActivity.class );
-                    startActivity(intent);
-                    break;
-                case R.id.btnCallEstimation:
-                    intent = new Intent(WriteEstimationActivity.this,CallEstimationActivity.class);
-                    startActivity(intent);
-                    break;
-                case R.id.btnWarranty:
-                    intent = new Intent(WriteEstimationActivity.this,WarrentyActivity.class);
-                    startActivity(intent);
-                    break;
-            }
+
+    private void initWebView() {
+        addressField = (WebView)findViewById(R.id.addressWebView);
+        addressField.getSettings().setJavaScriptEnabled(true);
+        addressField.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        addressField.addJavascriptInterface(new AndroidBridge(), "TestApp");
+        addressField.setWebChromeClient(new WebChromeClient());
+        addressField.loadUrl("http://codeman77.ivyro.net/getAddress.php");
+    }
+
+    public class AndroidBridge {
+        @JavascriptInterface
+        public void setAddress(final String arg1, final String arg2, final String arg3) {
+            handler.post(() -> {
+                addressTest.setText(String.format("(%s) %s [%s]", arg1, arg2, arg3));
+                initWebView();
+            });
         }
-    };
+    }
 
     private void setButtonAdd() {
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(viewNum < 2) {
-                    viewNum++;
-                    Spinner newSpin = new Spinner(WriteEstimationActivity.this);
-                    newSpin.setId(viewPreId + viewNum);
-                    newSpin.setAdapter(adapter);
-                    linear.addView(newSpin, new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.WRAP_CONTENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
-                    spinners.add(newSpin);
-                }else{
-                    Toast.makeText(WriteEstimationActivity.this, "더이상 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
-                }
+        btnAdd.setOnClickListener(v -> {
+            if(viewNum < 2) {
+                viewNum++;
+                Spinner newSpin = new Spinner(WriteEstimationActivity.this);
+                newSpin.setId(viewPreId + viewNum);
+                newSpin.setAdapter(adapter);
+                linear.addView(newSpin, new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
+                spinners.add(newSpin);
+            }else{
+                Toast.makeText(WriteEstimationActivity.this, "더이상 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void setButtonFinish() {
-        btnFin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String result ="";
+        btnFin.setOnClickListener(v -> {
+            String result ="";
 
-                for(int i=0; i<spinners.size(); i++){
-                    result += (spinners.get(i)).getSelectedItem().toString();
-                    if(i !=spinners.size()-1){
-                        result += "/";
-                    }
+            for(int i=0; i<spinners.size(); i++){
+                result += (spinners.get(i)).getSelectedItem().toString();
+                if(i !=spinners.size()-1){
+                    result += "/";
                 }
-                textResult.setText(result);
             }
+            textResult.setText(result);
         });
     }
 
     private void setButtonDelete() {
-        btnDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(viewNum !=0) {
-                    Spinner removeSpinner = (Spinner) findViewById(viewPreId + viewNum);
-                    linear.removeView(removeSpinner);
-                    viewNum--;
-                }
+        btnDel.setOnClickListener(v -> {
+            if(viewNum !=0) {
+                Spinner removeSpinner = (Spinner) findViewById(viewPreId + viewNum);
+                spinners.remove(spinners.indexOf(removeSpinner));
+                linear.removeView(removeSpinner);
+                viewNum--;
             }
         });
     }

@@ -8,16 +8,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class LobbyActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button btnEnroll;
-    // TODO : 수리 사례별, 파손 부위별 이미지 뷰 검색 기능 연동
+    ImageView caseFender, caseBumper, caseAudi, caseBenz, caseBmw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,13 @@ public class LobbyActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+
+        setWidgets();
+
         setBtnEnroll();
+
+        setImageClick();
     }
 
     @Override
@@ -78,6 +86,8 @@ public class LobbyActivity extends AppCompatActivity
         int id = item.getItemId();
         Intent intent;
 
+        Log.w("drawer item", String.valueOf(item));
+
         if (id == R.id.nav_estimation) {
             // Handle the camera action
         } else if (id == R.id.nav_myPage) {
@@ -87,8 +97,9 @@ public class LobbyActivity extends AppCompatActivity
             startActivity(intent);
         } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_share) {
-
+        } else if (id == R.id.createShop) {
+            intent = new Intent(LobbyActivity.this, SignupRepairShopActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_send) {
 
         }
@@ -97,13 +108,50 @@ public class LobbyActivity extends AppCompatActivity
         return true;
     }
 
-    private void setBtnEnroll() {
+    private void setWidgets() {
         btnEnroll = (Button)findViewById(R.id.btnEnroll);
-        btnEnroll.setOnClickListener(listener);
+        caseFender = (ImageView)findViewById(R.id.caseFender);
+        caseBumper = (ImageView)findViewById(R.id.caseBumper);
+        caseAudi = (ImageView)findViewById(R.id.caseAudi);
+        caseBenz = (ImageView)findViewById(R.id.caseBenz);
+        caseBmw = (ImageView)findViewById(R.id.caseBmw);
     }
 
-    View.OnClickListener listener = v -> {
-        Intent intent = new Intent(LobbyActivity.this, WriteEstimationActivity.class);
-        startActivity(intent);
-    };
+    private void setBtnEnroll() {
+        btnEnroll.setOnClickListener(v -> {
+            Intent intent = new Intent(LobbyActivity.this, WriteEstimationActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void setImageClick() {
+        View.OnClickListener imageClick = v -> {
+            Intent i = new Intent(LobbyActivity.this, CaseActivity.class);
+            switch(v.getId()) {
+                case R.id.caseFender :
+                    i.putExtra("case", "fender");
+                    break;
+                case R.id.caseBumper :
+                    i.putExtra("case", "bumper");
+                    break;
+                case R.id.caseAudi :
+                    i.putExtra("case", "audi");
+                    break;
+                case R.id.caseBenz :
+                    i.putExtra("case", "benz");
+                    break;
+                case R.id.caseBmw :
+                    i.putExtra("case", "bmw");
+                    break;
+            }
+            startActivity(i);
+        };
+        caseFender.setOnClickListener(imageClick);
+        caseBumper.setOnClickListener(imageClick);
+        caseAudi.setOnClickListener(imageClick);
+        caseBenz.setOnClickListener(imageClick);
+        caseBmw.setOnClickListener(imageClick);
+    }
+
+
 }

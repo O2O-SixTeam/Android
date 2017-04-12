@@ -49,7 +49,9 @@
         android:layout_below="@id/textId"
         android:layout_alignLeft="@id/signinFacebook"
         android:layout_alignRight="@id/signinFacebook"
-        android:hint="@string/exampleId"/>
+        android:hint="@string/exampleId"
+        android:inputType="textEmailAddress"
+        android:maxLines="1"/>
     <TextView
         android:id="@+id/errorId"
         android:layout_width="wrap_content"
@@ -73,7 +75,9 @@
         android:layout_below="@id/textPw"
         android:layout_alignLeft="@id/signinFacebook"
         android:layout_alignRight="@id/signinFacebook"
-        android:hint="@string/examplePw"/>
+        android:hint="@string/examplePw"
+        android:inputType="textPassword"
+        android:maxLines="1"/>
     <TextView
         android:id="@+id/errorPw"
         android:layout_width="wrap_content"

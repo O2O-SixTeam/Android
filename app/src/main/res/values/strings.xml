@@ -46,4 +46,17 @@
 
     <!--Facebook Login-->
     <string name="facebook_app_id">268254320295870</string>
+
+    <!-- WriteEstimation Activity -->
+    <string name="write_estimation">견적 요청서 작성</string>
+
+    <!-- Navigation drawer -->
+    <string name="createShop">공업사 입점 신청</string>
+
+    <!-- Signup Repair Shop -->
+    <string name="signupShop"><u>Sign up for New repair shop</u></string>
+    <string name="shopname">공업사 이름</string>
+    <string name="shopnameHint">ex) 대한카센터</string>
+    <string name="shopnumber">공업사 연락처</string>
+    <string name="shopnumberHint">ex) 025555555</string>
 </resources>

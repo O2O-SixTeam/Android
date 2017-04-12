@@ -49,7 +49,7 @@
             android:layout_below="@id/enrollLayout"
             android:background="#FFDDDDDD"/>
         <ImageView
-            android:id="@+id/case1"
+            android:id="@+id/caseFender"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_below="@id/divider1"/>
@@ -57,10 +57,10 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:layout_below="@id/case1"
+            android:layout_below="@id/caseFender"
             android:background="#FFDDDDDD"/>
         <ImageView
-            android:id="@+id/case2"
+            android:id="@+id/caseBumper"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_below="@id/divider2"/>
@@ -68,13 +68,41 @@
             android:id="@+id/divider3"
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:layout_below="@id/case2"
+            android:layout_below="@id/caseBumper"
             android:background="#FFDDDDDD"/>
         <ImageView
-            android:id="@+id/case3"
+            android:id="@+id/caseAudi"
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_below="@id/divider3"/>
+        <TextView
+            android:id="@+id/divider4"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/caseAudi"
+            android:background="#FFDDDDDD"/>
+        <ImageView
+            android:id="@+id/caseBenz"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/divider4"/>
+        <TextView
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/caseBenz"
+            android:background="#FFDDDDDD"/>
+        <ImageView
+            android:id="@+id/caseBmw"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/divider5"/>
+        <TextView
+            android:id="@+id/divider6"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/caseBmw"
+            android:background="#FFDDDDDD"/>
     </RelativeLayout>
 
 </ScrollView>
