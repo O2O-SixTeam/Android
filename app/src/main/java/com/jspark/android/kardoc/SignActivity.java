@@ -87,7 +87,7 @@ public class SignActivity extends AppCompatActivity {
 
     private void setRetrofit() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.kardoc.kr/")
+                .baseUrl("http://api.kardoc.kr/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiServices = retrofit.create(ApiServices.class);

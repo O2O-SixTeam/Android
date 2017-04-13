@@ -69,7 +69,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
 
     private void setRetrofitInShop() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.kardoc.kr/")
+                .baseUrl("http://api.kardoc.kr/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         apiServices = retrofit.create(ApiServices.class);
