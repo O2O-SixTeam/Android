@@ -165,15 +165,6 @@ public class SignupRepairShopActivity extends AppCompatActivity {
 //                shop.setLongitude(longitudeData);
 //                shop.setLatitude(latitudeData);
 
-                Log.w("shop", shop.getShopname()
-                            + " / "
-                            + shop.getAddress()
-                            + " / "
-                            + shop.getZone()
-                            + " / "
-                            + shop.getDetail()
-                            + " / "
-                            + shop.getNumber());
                 Call<ResponseBody> remoteData = apiServices.createShop("Token "+token, shop);
                 remoteData.enqueue(new Callback<ResponseBody>() {
                     @Override
