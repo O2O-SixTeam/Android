@@ -29,6 +29,7 @@ import com.jspark.android.kardoc.domain.Result;
 import com.jspark.android.kardoc.domain.User;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.EditUtil;
+import com.jspark.android.kardoc.util.RetrofitUtil;
 import com.jspark.android.kardoc.util.SignUtil;
 import com.jspark.android.kardoc.util.TextUtil;
 
@@ -38,8 +39,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignActivity extends AppCompatActivity {
 
@@ -86,11 +85,8 @@ public class SignActivity extends AppCompatActivity {
     }
 
     private void setRetrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.kardoc.kr/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        apiServices = retrofit.create(ApiServices.class);
+        RetrofitUtil retrofit = RetrofitUtil.getInstance();
+        apiServices = retrofit.getApiServices();
     }
 
     private void setCallbackManager() {

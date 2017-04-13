@@ -17,13 +17,12 @@ import android.widget.Toast;
 import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.EditUtil;
+import com.jspark.android.kardoc.util.RetrofitUtil;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignupRepairShopActivity extends AppCompatActivity {
 
@@ -68,11 +67,8 @@ public class SignupRepairShopActivity extends AppCompatActivity {
     }
 
     private void setRetrofitInShop() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.kardoc.kr/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        apiServices = retrofit.create(ApiServices.class);
+        RetrofitUtil retrofit = RetrofitUtil.getInstance();
+        apiServices = retrofit.getApiServices();
     }
 
     private void setWidget() {
