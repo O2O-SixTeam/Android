@@ -2,6 +2,7 @@ package com.jspark.android.kardoc;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.RetrofitUtil;
+
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -46,6 +49,8 @@ public class SignupRepairShopActivity extends AppCompatActivity {
     String longitudeData = "";
     String latitudeData = "";
 
+    Geocoder geocoder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +69,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
         setBtnSignupCompany();
         setBtnCancle();
 
+        geocoder = new Geocoder(this, Locale.KOREA);
     }
 
     private void setRetrofitInShop() {
@@ -97,7 +103,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
         @JavascriptInterface
         public void setAddress(final String arg1, final String arg2, final String arg3) {
             handler.post(() -> {
-                zipCodeTest.setText(String.format("(%s) %s [%s] %s", arg1, arg2, arg3, arg2.split(" ")[1]));
+                zipCodeTest.setText(String.format("(%s) %s [%s]", arg1, arg2, arg3));
                 addressData = arg2+" "+arg3;
                 zoneData = arg2.split(" ")[1];
                 initWebView();
@@ -106,7 +112,6 @@ public class SignupRepairShopActivity extends AppCompatActivity {
     }
 
     private void setBtnSignupCompany() {
-
         btnSignup.setOnClickListener(v -> {
             boolean hasError = false;
 
@@ -134,9 +139,20 @@ public class SignupRepairShopActivity extends AppCompatActivity {
             // 상세주소 검사
             if (!("".equals(EditUtil.gTFE(editDetailAddress)))) {
                 detailData = EditUtil.gTFE(editDetailAddress);
+                if(!addressData.contains(detailData)) addressData = addressData + " " + detailData;
             } else {
                 hasError = true;
                 Toast.makeText(SignupRepairShopActivity.this, "상세주소를 입력해주세요", Toast.LENGTH_SHORT).show();
+            }
+
+            // 주소로부터 위경도 가져오기
+            try {
+                longitudeData = String.valueOf(geocoder.getFromLocationName(addressData, 1).get(0).getLongitude());
+                latitudeData = String.valueOf(geocoder.getFromLocationName(addressData, 1).get(0).getLatitude());
+                Log.w("longitude", longitudeData);
+                Log.w("latitude", latitudeData);
+            } catch(Exception e) {
+                e.printStackTrace();
             }
 
             //상호 소개 검사
@@ -158,8 +174,8 @@ public class SignupRepairShopActivity extends AppCompatActivity {
                 shop.setZone(zoneData);
                 shop.setDetail(detailData);
                 shop.setNumber(numberData);
-//                shop.setLongitude(longitudeData);
-//                shop.setLatitude(latitudeData);
+                shop.setLongitude(longitudeData);
+                shop.setLatitude(latitudeData);
 
                 Call<ResponseBody> remoteData = apiServices.createShop("Token "+token, shop);
                 remoteData.enqueue(new Callback<ResponseBody>() {
