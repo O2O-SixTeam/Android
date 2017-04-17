@@ -5,6 +5,7 @@ import com.jspark.android.kardoc.domain.Result;
 import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.domain.User;
 
+import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,6 +14,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 /**
@@ -48,5 +50,14 @@ public interface ApiServices {
     Call<ResponseBody> request(
             @Path("token") String token,
             @Body Request request
+    );
+
+    // 이미지 전송
+    @POST("shop/")
+    Call<ResponseBody> uploadImg(
+            @Header("Authorization") String token,
+            @Part MultipartBody.Part image1,
+            @Part MultipartBody.Part image2,
+            @Part MultipartBody.Part image3
     );
 }
