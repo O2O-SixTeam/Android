@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WriteEstimationActivity"
+            android:name=".RequestEstimationActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity

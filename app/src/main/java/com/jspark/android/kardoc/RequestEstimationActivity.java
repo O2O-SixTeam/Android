@@ -24,7 +24,7 @@ import java.util.List;
  * Created by Songmoo on 2017-03-26.
  */
 
-public class WriteEstimationActivity extends AppCompatActivity {
+public class RequestEstimationActivity extends AppCompatActivity {
 
     public static final int BRAND_CODE = 200;
 
@@ -77,15 +77,15 @@ public class WriteEstimationActivity extends AppCompatActivity {
         Intent intent;
         switch (v.getId()){
             case R.id.btnBrend:
-                intent = new Intent(WriteEstimationActivity.this, BrandActivity.class );
+                intent = new Intent(RequestEstimationActivity.this, BrandActivity.class );
                 startActivityForResult(intent, BRAND_CODE);
                 break;
             case R.id.btnCallEstimation:
-                intent = new Intent(WriteEstimationActivity.this,CallEstimationActivity.class);
+                intent = new Intent(RequestEstimationActivity.this,CallEstimationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.btnWarranty:
-                intent = new Intent(WriteEstimationActivity.this,WarrentyActivity.class);
+                intent = new Intent(RequestEstimationActivity.this,WarrentyActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -140,13 +140,13 @@ public class WriteEstimationActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(v -> {
             if(viewNum < 2) {
                 viewNum++;
-                Spinner newSpin = new Spinner(WriteEstimationActivity.this);
+                Spinner newSpin = new Spinner(RequestEstimationActivity.this);
                 newSpin.setId(viewPreId + viewNum);
                 newSpin.setAdapter(adapter);
                 linear.addView(newSpin, new LinearLayoutCompat.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
                 spinners.add(newSpin);
             }else{
-                Toast.makeText(WriteEstimationActivity.this, "더이상 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RequestEstimationActivity.this, "더이상 추가할 수 없습니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }

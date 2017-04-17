@@ -1,6 +1,6 @@
 package com.jspark.android.kardoc.server;
 
-import com.jspark.android.kardoc.domain.Request;
+import com.jspark.android.kardoc.domain.Estimation;
 import com.jspark.android.kardoc.domain.Result;
 import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.domain.User;
@@ -15,7 +15,6 @@ import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
-import retrofit2.http.Path;
 
 /**
  * Created by jsPark on 2017. 4. 3..
@@ -45,11 +44,10 @@ public interface ApiServices {
     );
 
     // 견적요청서 생성
-    @Headers("Authorization: Token {token}")
     @POST("request/")
     Call<ResponseBody> request(
-            @Path("token") String token,
-            @Body Request request
+            @Header("Authorization") String token,
+            @Body Estimation request
     );
 
     // 이미지 전송

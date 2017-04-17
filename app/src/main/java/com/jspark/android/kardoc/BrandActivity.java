@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import static com.jspark.android.kardoc.WriteEstimationActivity.BRAND_CODE;
+import static com.jspark.android.kardoc.RequestEstimationActivity.BRAND_CODE;
 
 public class BrandActivity extends AppCompatActivity {
 

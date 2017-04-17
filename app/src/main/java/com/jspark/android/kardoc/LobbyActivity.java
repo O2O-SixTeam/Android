@@ -119,7 +119,7 @@ public class LobbyActivity extends AppCompatActivity
 
     private void setBtnEnroll() {
         btnEnroll.setOnClickListener(v -> {
-            Intent intent = new Intent(LobbyActivity.this, WriteEstimationActivity.class);
+            Intent intent = new Intent(LobbyActivity.this, RequestEstimationActivity.class);
             startActivity(intent);
         });
     }
