@@ -17,6 +17,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jspark.android.kardoc.server.ApiServices;
+import com.jspark.android.kardoc.util.RetrofitUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +50,8 @@ public class RequestEstimationActivity extends AppCompatActivity {
     final int viewPreId = 5350;
     int viewNum = 0;
 
+    ApiServices apiServices = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,11 @@ public class RequestEstimationActivity extends AppCompatActivity {
         btnCallEstimation.setOnClickListener(listener);
         btnWarranty.setOnClickListener(listener);
 
+    }
+
+    private void setRetrofit() {
+        RetrofitUtil retrofit = RetrofitUtil.getInstance();
+        apiServices = retrofit.getApiServices();
     }
 
     View.OnClickListener listener = v -> {
