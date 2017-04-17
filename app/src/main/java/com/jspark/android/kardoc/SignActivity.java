@@ -341,7 +341,7 @@ public class SignActivity extends AppCompatActivity {
                     user.setGender(genderData);
                     user.setEmail(emailData);
                     user.setBirth(birthData);
-                    user.setCustomid(emailData);
+                    user.setUsername(emailData);
                     user.setPassword(passwordData);
 
                     Call<ResponseBody> remoteData = apiServices.createUser(user);

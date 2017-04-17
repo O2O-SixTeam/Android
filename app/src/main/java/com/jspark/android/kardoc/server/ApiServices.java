@@ -12,7 +12,6 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 
@@ -22,7 +21,6 @@ import retrofit2.http.Part;
 
 public interface ApiServices {
     // 유저 생성
-    @Headers("Content-Type:application/json")
     @POST("user/")
     Call<ResponseBody> createUser(
             @Body User user
