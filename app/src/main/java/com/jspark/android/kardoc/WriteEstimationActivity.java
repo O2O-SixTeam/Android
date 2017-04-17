@@ -26,6 +26,8 @@ import java.util.List;
 
 public class WriteEstimationActivity extends AppCompatActivity {
 
+    public static final int BRAND_CODE = 200;
+
     LinearLayout linear;
     Spinner spinnerOrg;
     TextView textResult; //스피너의 값
@@ -76,7 +78,7 @@ public class WriteEstimationActivity extends AppCompatActivity {
         switch (v.getId()){
             case R.id.btnBrend:
                 intent = new Intent(WriteEstimationActivity.this, BrandActivity.class );
-                startActivity(intent);
+                startActivityForResult(intent, BRAND_CODE);
                 break;
             case R.id.btnCallEstimation:
                 intent = new Intent(WriteEstimationActivity.this,CallEstimationActivity.class);
@@ -88,6 +90,14 @@ public class WriteEstimationActivity extends AppCompatActivity {
                 break;
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==BRAND_CODE) {
+            btnBrand.setText(data.getStringExtra("result"));
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 
     private void setWidgets() {
         linear = (LinearLayout)findViewById(R.id.linearLayout);

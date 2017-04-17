@@ -4,17 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.jspark.android.kardoc.BrandActivity">
+    tools:context="com.jspark.android.kardoc.BrandActivity"
+    android:background="#FF000000">
 
-    <TextView
-        android:id="@+id/textView5"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/brandRecycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:text="다양한 브랜드 로고 배치" />
+        android:layout_height="match_parent"
+        android:paddingRight="8dp">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
