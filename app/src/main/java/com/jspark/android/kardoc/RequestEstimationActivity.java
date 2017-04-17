@@ -1,9 +1,11 @@
 package com.jspark.android.kardoc;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +22,13 @@ import com.jspark.android.kardoc.util.RetrofitUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.jspark.android.kardoc.SignActivity.myToken;
 
 /**
  * Created by Songmoo on 2017-03-26.
@@ -38,7 +47,7 @@ public class RequestEstimationActivity extends AppCompatActivity {
 
     EditText carNameField, carNumberField, carVinField, phoneNumberField;
 
-    CheckBox insuranceCheckBox, rentcarCheckBox, pickupCheckBox;
+    CheckBox insuranceCheckBox, rentcarCheckBox, pickupCheckBox, agreementCheckBox;
 
     List<Spinner> spinners = new ArrayList<>();
     String[] partsData;
@@ -65,8 +74,8 @@ public class RequestEstimationActivity extends AppCompatActivity {
         setButtonDelete();
 
         btnBrand.setOnClickListener(listener);
-        btnCallEstimation.setOnClickListener(listener);
         btnWarranty.setOnClickListener(listener);
+        setBtnCallEstimation();
 
     }
 
@@ -88,10 +97,6 @@ public class RequestEstimationActivity extends AppCompatActivity {
                 intent = new Intent(RequestEstimationActivity.this, BrandActivity.class );
                 startActivityForResult(intent, BRAND_CODE);
                 break;
-            case R.id.btnCallEstimation:
-                intent = new Intent(RequestEstimationActivity.this,CallEstimationActivity.class);
-                startActivity(intent);
-                break;
             case R.id.btnWarranty:
                 intent = new Intent(RequestEstimationActivity.this,WarrentyActivity.class);
                 startActivity(intent);
@@ -101,7 +106,7 @@ public class RequestEstimationActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==BRAND_CODE) {
+        if(requestCode==BRAND_CODE&&data!=null) {
             btnBrand.setText(data.getStringExtra("result"));
         }
         super.onActivityResult(requestCode, resultCode, data);
@@ -125,6 +130,7 @@ public class RequestEstimationActivity extends AppCompatActivity {
         insuranceCheckBox = (CheckBox)findViewById(R.id.cbFixInsurance);
         rentcarCheckBox = (CheckBox)findViewById(R.id.cbRentCar);
         pickupCheckBox = (CheckBox)findViewById(R.id.cbPickupService);
+        agreementCheckBox = (CheckBox)findViewById(R.id.cbAgreement);
     }
 
     private void setBtnCallEstimation() {
@@ -134,10 +140,23 @@ public class RequestEstimationActivity extends AppCompatActivity {
                 Boolean hasError = false;
 
                 Estimation estimation = new Estimation();
+                if(viewNum==0) {
+                    estimation.setBroken1((spinners.get(0)).getSelectedItem().toString());
+                } else if(viewNum==1) {
+                    estimation.setBroken1((spinners.get(0)).getSelectedItem().toString());
+                    estimation.setBroken2((spinners.get(1)).getSelectedItem().toString());
+                } else if(viewNum==2) {
+                    estimation.setBroken1((spinners.get(0)).getSelectedItem().toString());
+                    estimation.setBroken2((spinners.get(1)).getSelectedItem().toString());
+                    estimation.setBroken3((spinners.get(2)).getSelectedItem().toString());
+                }
+                Log.w("brokens", estimation.getBroken1() + " / " + estimation.getBroken2() + " / " + estimation.getBroken3());
+
 
                 // 브랜드 선택 유무 확인
                 if(!btnBrand.getText().toString().contains("*")) {
                     estimation.setBrand(btnBrand.getText().toString());
+                    Log.w("brand", estimation.getBrand());
                 } else {
                     hasError = true;
                     Toast.makeText(RequestEstimationActivity.this, "차량 제조사를 선택해주세요", Toast.LENGTH_SHORT).show();
@@ -146,6 +165,7 @@ public class RequestEstimationActivity extends AppCompatActivity {
                 // 차량명 / 연식 입력 확인
                 if(!("".equals(carNameField.getText().toString()))) {
                     estimation.setModel(carNameField.getText().toString());
+                    Log.w("model", estimation.getModel());
                 } else {
                     hasError = true;
                     Toast.makeText(RequestEstimationActivity.this, "차량명과 연식을 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -154,21 +174,59 @@ public class RequestEstimationActivity extends AppCompatActivity {
                 // 차량번호 입력 확인 (선택 사항이므로 에러표기 안함)
                 if(!("".equals(carNumberField.getText().toString()))) {
                     estimation.setCarnumber(carNumberField.getText().toString());
+                    Log.w("number", carNumberField.getText().toString());
                 }
 
+                // 추가 서비스 확인
+                estimation.setInsurancerepait(insuranceCheckBox.isChecked());
+                estimation.setRentcar(rentcarCheckBox.isChecked());
+                estimation.setPickup(pickupCheckBox.isChecked());
+                Log.w("services", estimation.getInsurancerepait() + " / " +estimation.getRentcar() + " / " + estimation.getPickup());
 
+                // 차대번호 확인
+                if(!("".equals(carVinField.getText().toString()))) {
+                    estimation.setCarid(carVinField.getText().toString());
+                    Log.w("vin", estimation.getCarid());
+                }
+
+                // 연락처 확인
+                if(!("".equals(phoneNumberField.getText().toString()))) {
+                    estimation.setNumber(phoneNumberField.getText().toString());
+                } else {
+                    hasError = true;
+                    Toast.makeText(RequestEstimationActivity.this, "연락처를 확인해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+                // 개인정보 취급 방침 체크 확인
+                if(!agreementCheckBox.isChecked()) {
+                    hasError = true;
+                    Toast.makeText(RequestEstimationActivity.this, "개인정보 취급 방침에 동의해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+                // 오류 없을 시
+                if(!hasError) {
+                    SharedPreferences sharedPreferences = getSharedPreferences(myToken, MODE_PRIVATE);
+                    String token = sharedPreferences.getString(myToken, null);
+
+                    Call<ResponseBody> reqeustEstimation = apiServices.request("Token "+token, estimation);
+                    reqeustEstimation.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            Log.w("response", response.toString());
+                            if(response.code()==201) {
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                        }
+                    });
+                }
             }
         });
     }
-
-
-
-
-
-
-
-
-
 
     private void setButtonAdd() {
         btnAdd.setOnClickListener(v -> {

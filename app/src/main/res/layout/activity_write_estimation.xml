@@ -213,7 +213,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
-                android:digits="1234567890"/>
+                android:digits="1234567890"
+                android:maxLength="11"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -229,7 +230,7 @@
                 android:layout_height="wrap_content"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="사용자 이용 약관 및 개인정도 취급 방침에 동의 합니다." />
+                android:text="사용자 이용 약관 및 개인정보 취급 방침에 동의 합니다." />
 
             <Button
                 android:id="@+id/btnCallEstimation"
