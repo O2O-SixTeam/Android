@@ -122,18 +122,6 @@
                 android:layout_height="wrap_content"
                 android:hint="(선택) 차량번호 예: 38가1246" />
 
-            <WebView
-                android:id="@+id/addressWebView"
-                android:layout_width="match_parent"
-                android:layout_height="400dp">
-            </WebView>
-
-            <TextView
-                android:id="@+id/webViewTestText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="test"/>
-
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="match_parent"
@@ -163,7 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="30dp"
-                android:text="수리 유형*"
+                android:text="추가 서비스*"
                 android:textSize="10sp" />
 
             <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
@@ -180,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="내부수리, 유리손상, 휠 복원" />
+                android:text="렌트카" />
 
             <CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/cbPickupService"
@@ -188,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:button="@null"
                 android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
-                android:text="내부수리, 유리손상, 휠 복원" />
+                android:text="픽업 서비스" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -208,7 +196,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_weight="1"
-                    android:hint="부품교환 필요한 경우 입력" />
+                    android:hint="부품교환 필요한 경우 입력"
+                    android:inputType="text"/>
             </LinearLayout>
 
             <TextView

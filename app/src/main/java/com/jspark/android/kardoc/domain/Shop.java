@@ -12,6 +12,7 @@ public class Shop {
     private String number;
     private String longitude;
     private String latitude;
+    private String bnumber;
 
     public String getShopname() {
         return shopname;
@@ -67,5 +68,13 @@ public class Shop {
 
     public void setLatitude(String latitude) {
         this.latitude = latitude;
+    }
+
+    public String getBnumber() {
+        return bnumber;
+    }
+
+    public void setBnumber(String bnumber) {
+        this.bnumber = bnumber;
     }
 }

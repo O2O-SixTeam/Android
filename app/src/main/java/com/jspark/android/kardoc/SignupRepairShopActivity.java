@@ -48,6 +48,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
     String numberData = "";
     String longitudeData = "";
     String latitudeData = "";
+    String bnumberData = "";
 
     Geocoder geocoder;
 

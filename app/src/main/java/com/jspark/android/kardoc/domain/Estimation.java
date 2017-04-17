@@ -16,7 +16,11 @@ public class Estimation {
     private String detail;
     private String extra;
     private String number;
-    private String completed;
+    private Boolean completed;
+    private Boolean insurancerepait;
+    private Boolean rentcar;
+    private Boolean pickup;
+    private String carid;
     private Url estimate;
 
     public String getBrand() {
@@ -91,11 +95,11 @@ public class Estimation {
         this.number = number;
     }
 
-    public String getCompleted() {
+    public Boolean getCompleted() {
         return completed;
     }
 
-    public void setCompleted(String completed) {
+    public void setCompleted(Boolean completed) {
         this.completed = completed;
     }
 
@@ -105,5 +109,37 @@ public class Estimation {
 
     public void setEstimate(Url estimate) {
         this.estimate = estimate;
+    }
+
+    public Boolean getInsurancerepait() {
+        return insurancerepait;
+    }
+
+    public void setInsurancerepait(Boolean insurancerepait) {
+        this.insurancerepait = insurancerepait;
+    }
+
+    public Boolean getRentcar() {
+        return rentcar;
+    }
+
+    public void setRentcar(Boolean rentcar) {
+        this.rentcar = rentcar;
+    }
+
+    public Boolean getPickup() {
+        return pickup;
+    }
+
+    public void setPickup(Boolean pickup) {
+        this.pickup = pickup;
+    }
+
+    public String getCarid() {
+        return carid;
+    }
+
+    public void setCarid(String carid) {
+        this.carid = carid;
     }
 }

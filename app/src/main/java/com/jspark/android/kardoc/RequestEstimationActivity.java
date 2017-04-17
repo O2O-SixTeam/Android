@@ -2,21 +2,19 @@ package com.jspark.android.kardoc;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jspark.android.kardoc.domain.Estimation;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.RetrofitUtil;
 
@@ -39,9 +37,8 @@ public class RequestEstimationActivity extends AppCompatActivity {
     Button btnBrand, btnCallEstimation, btnWarranty;
 
     EditText carNameField, carNumberField, carVinField, phoneNumberField;
-    WebView addressField;
-    TextView addressTest;
-    Handler handler;
+
+    CheckBox insuranceCheckBox, rentcarCheckBox, pickupCheckBox;
 
     List<Spinner> spinners = new ArrayList<>();
     String[] partsData;
@@ -59,14 +56,9 @@ public class RequestEstimationActivity extends AppCompatActivity {
 
         setWidgets();
 
-        partsData = getResources().getStringArray(R.array.parts);
+        setRetrofit();
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, partsData);
-
-        spinnerOrg.setAdapter(adapter);
-
-        initWebView();
-        handler = new Handler();
+        setSpinnerOrg();
 
         setButtonAdd();
         setButtonFinish();
@@ -81,6 +73,12 @@ public class RequestEstimationActivity extends AppCompatActivity {
     private void setRetrofit() {
         RetrofitUtil retrofit = RetrofitUtil.getInstance();
         apiServices = retrofit.getApiServices();
+    }
+
+    private void setSpinnerOrg() {
+        partsData = getResources().getStringArray(R.array.parts);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, partsData);
+        spinnerOrg.setAdapter(adapter);
     }
 
     View.OnClickListener listener = v -> {
@@ -124,27 +122,53 @@ public class RequestEstimationActivity extends AppCompatActivity {
         btnCallEstimation = (Button)findViewById(R.id.btnCallEstimation);
         btnWarranty = (Button)findViewById(R.id.btnWarranty);
         textResult = (TextView)findViewById(R.id.textResult);
-        addressTest = (TextView)findViewById(R.id.webViewTestText);
+        insuranceCheckBox = (CheckBox)findViewById(R.id.cbFixInsurance);
+        rentcarCheckBox = (CheckBox)findViewById(R.id.cbRentCar);
+        pickupCheckBox = (CheckBox)findViewById(R.id.cbPickupService);
     }
 
-    private void initWebView() {
-        addressField = (WebView)findViewById(R.id.addressWebView);
-        addressField.getSettings().setJavaScriptEnabled(true);
-        addressField.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
-        addressField.addJavascriptInterface(new AndroidBridge(), "TestApp");
-        addressField.setWebChromeClient(new WebChromeClient());
-        addressField.loadUrl("http://codeman77.ivyro.net/getAddress.php");
+    private void setBtnCallEstimation() {
+        btnCallEstimation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Boolean hasError = false;
+
+                Estimation estimation = new Estimation();
+
+                // 브랜드 선택 유무 확인
+                if(!btnBrand.getText().toString().contains("*")) {
+                    estimation.setBrand(btnBrand.getText().toString());
+                } else {
+                    hasError = true;
+                    Toast.makeText(RequestEstimationActivity.this, "차량 제조사를 선택해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+                // 차량명 / 연식 입력 확인
+                if(!("".equals(carNameField.getText().toString()))) {
+                    estimation.setModel(carNameField.getText().toString());
+                } else {
+                    hasError = true;
+                    Toast.makeText(RequestEstimationActivity.this, "차량명과 연식을 입력해주세요", Toast.LENGTH_SHORT).show();
+                }
+
+                // 차량번호 입력 확인 (선택 사항이므로 에러표기 안함)
+                if(!("".equals(carNumberField.getText().toString()))) {
+                    estimation.setCarnumber(carNumberField.getText().toString());
+                }
+
+
+            }
+        });
     }
 
-    public class AndroidBridge {
-        @JavascriptInterface
-        public void setAddress(final String arg1, final String arg2, final String arg3) {
-            handler.post(() -> {
-                addressTest.setText(String.format("(%s) %s [%s]", arg1, arg2, arg3));
-                initWebView();
-            });
-        }
-    }
+
+
+
+
+
+
+
+
 
     private void setButtonAdd() {
         btnAdd.setOnClickListener(v -> {
