@@ -24,7 +24,6 @@ import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.RetrofitUtil;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +31,9 @@ import retrofit2.Response;
 import static com.jspark.android.kardoc.SignActivity.myToken;
 
 public class RepairShopMainActivity extends AppCompatActivity {
-
+    //@@@@@ 지울것
+    public static Shop SHOP = null;
+    //@@@@@@@
     private final int REQ_PERMISSION = 100; // 권한요청코드
     private final int REQ_CAMERA = 101; // 카메라 요청코드
     private final int REQ_GALLERY = 102; // 갤러리 요청코드
@@ -43,7 +44,7 @@ public class RepairShopMainActivity extends AppCompatActivity {
     Button mOk, mCancel, mSave;
     EditText editText;
     Dialog customDialog;
-    String getUri = "";
+    String getUrl = "";
 
     ApiServices apiServices = null;
 
@@ -158,19 +159,19 @@ public class RepairShopMainActivity extends AppCompatActivity {
                     break;
 
                 case R.id.testMovie:
-                    if (!getUri.equals("")) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUri)));
+                    if (!getUrl.equals("")) {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getUrl)));
                     } else {
                         Toast.makeText(RepairShopMainActivity.this, "먼저 url을 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }
                     break;
                 case R.id.save:
                     if(!hasError) {
-                        //SHOP 이미 저장되어 있음
+                        //SHOP = 로그인이 되어있는 유저
                         SharedPreferences sharedPreferences = getSharedPreferences(myToken, MODE_PRIVATE);
                         String token = sharedPreferences.getString(myToken, null);
 
-                        Call<Shop> uploadurl = apiServices.uploadmovie("Token "+token, 1, SignupRepairShopActivity.SHOP.getShopname(), getUri);
+                        Call<Shop> uploadurl = apiServices.uploadmovie("Token "+token, SHOP.getShopname(), getUrl);
                         uploadurl.enqueue(new Callback<Shop>() {
                             @Override
                             public void onResponse(Call<Shop> call, Response<Shop> response) {
@@ -207,8 +208,8 @@ public class RepairShopMainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                getUri = editText.getText().toString();
-                if (!getUri.equals("")) {
+                getUrl = editText.getText().toString();
+                if (!getUrl.equals("")) {
                     customDialog.dismiss();
                 } else {
                     Toast.makeText(RepairShopMainActivity.this, "url을 입력해주세요.", Toast.LENGTH_SHORT).show();

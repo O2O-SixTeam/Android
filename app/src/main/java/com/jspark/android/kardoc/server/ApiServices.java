@@ -29,9 +29,6 @@ public interface ApiServices {
             @Body User user
     );
 
-    // 유저 생성
-    @GET("user/{user_id}")
-    Call<User> getUser(@Path("user_id") int userId);
 
     // 로그인
     @FormUrlEncoded
@@ -68,14 +65,8 @@ public interface ApiServices {
     Call<Shop> uploadmovie(
             @Header("Authorization") String token,
             //ShopName은 필수값입니다.
-            @Path("shopId") int shopId,
             @Field("shopname") String shopName,
             @Field("video") String url
     );
 
-//    @PUT("shop/")
-//    Call<ResponseBody> updateShop(
-//            @Header("Authorization") String token,
-//            @Body Shop shop
-//    );
 }

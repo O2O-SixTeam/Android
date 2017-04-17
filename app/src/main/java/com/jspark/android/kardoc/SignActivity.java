@@ -425,6 +425,7 @@ public class SignActivity extends AppCompatActivity {
                             Log.w("token shared", sharedPreferences.getString("token" + userName, "null"));
                             Log.w("token mine", sharedPreferences.getString(myToken, "null"));
 
+
                             Intent i  = new Intent(SignActivity.this, LobbyActivity.class);
                             startActivity(i);
                             finish();

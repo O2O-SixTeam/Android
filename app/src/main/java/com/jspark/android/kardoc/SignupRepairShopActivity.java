@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jspark.android.kardoc.domain.Shop;
-import com.jspark.android.kardoc.domain.User;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.RetrofitUtil;
@@ -186,19 +185,6 @@ public class SignupRepairShopActivity extends AppCompatActivity {
                         Log.w("token", token);
                         Log.w("response", response.toString());
                         if(response.code()==201) {
-                            //생성 성공시 SHOP '어디엔가' 저장.
-                            apiServices.getUser(1/*USER.id*/).enqueue(new Callback<User>() {
-                                @Override
-                                public void onResponse(Call<User> call, Response<User> response) {
-                                    //USER = response.body();
-                                }
-
-                                @Override
-                                public void onFailure(Call<User> call, Throwable t) {
-
-                                }
-                            });
-                            SHOP = response.body();
                             finish();
                         } else {
 
@@ -216,8 +202,6 @@ public class SignupRepairShopActivity extends AppCompatActivity {
         });
     }
 
-    //@@@@@ 지울것
-    public static Shop SHOP = null;
     private void setBtnCancle() {
         btnCancle.setOnClickListener((v1) -> onBackPressed());
     }
