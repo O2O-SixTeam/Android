@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jspark.android.kardoc.domain.Shop;
+import com.jspark.android.kardoc.domain.User;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.EditUtil;
 import com.jspark.android.kardoc.util.RetrofitUtil;
@@ -178,21 +179,33 @@ public class SignupRepairShopActivity extends AppCompatActivity {
                 shop.setLongitude(longitudeData);
                 shop.setLatitude(latitudeData);
 
-                Call<ResponseBody> remoteData = apiServices.createShop("Token "+token, shop);
-                remoteData.enqueue(new Callback<ResponseBody>() {
+                Call<Shop> remoteData = apiServices.createShop("Token "+token, shop);
+                remoteData.enqueue(new Callback<Shop>() {
                     @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    public void onResponse(Call<Shop> call, Response<Shop> response) {
                         Log.w("token", token);
                         Log.w("response", response.toString());
                         if(response.code()==201) {
+                            //생성 성공시 SHOP '어디엔가' 저장.
+                            apiServices.getUser(1/*USER.id*/).enqueue(new Callback<User>() {
+                                @Override
+                                public void onResponse(Call<User> call, Response<User> response) {
+                                    //USER = response.body();
+                                }
+
+                                @Override
+                                public void onFailure(Call<User> call, Throwable t) {
+
+                                }
+                            });
+                            SHOP = response.body();
                             finish();
                         } else {
 
                         }
                     }
-
                     @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    public void onFailure(Call<Shop> call, Throwable t) {
 
                     }
                 });
@@ -203,6 +216,8 @@ public class SignupRepairShopActivity extends AppCompatActivity {
         });
     }
 
+    //@@@@@ 지울것
+    public static Shop SHOP = null;
     private void setBtnCancle() {
         btnCancle.setOnClickListener((v1) -> onBackPressed());
     }

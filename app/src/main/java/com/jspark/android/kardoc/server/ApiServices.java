@@ -11,9 +11,12 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 /**
  * Created by jsPark on 2017. 4. 3..
@@ -26,6 +29,10 @@ public interface ApiServices {
             @Body User user
     );
 
+    // 유저 생성
+    @GET("user/{user_id}")
+    Call<User> getUser(@Path("user_id") int userId);
+
     // 로그인
     @FormUrlEncoded
     @POST("token-auth/")
@@ -36,7 +43,7 @@ public interface ApiServices {
 
     // 공업사 생성
     @POST("shop/")
-    Call<ResponseBody> createShop(
+    Call<Shop> createShop(
             @Header("Authorization") String token,
             @Body Shop shop
     );
@@ -56,4 +63,19 @@ public interface ApiServices {
             @Part MultipartBody.Part image2,
             @Part MultipartBody.Part image3
     );
+
+    @PUT("shop/{shopId}/")
+    Call<Shop> uploadmovie(
+            @Header("Authorization") String token,
+            //ShopName은 필수값입니다.
+            @Path("shopId") int shopId,
+            @Field("shopname") String shopName,
+            @Field("video") String url
+    );
+
+//    @PUT("shop/")
+//    Call<ResponseBody> updateShop(
+//            @Header("Authorization") String token,
+//            @Body Shop shop
+//    );
 }

@@ -12,6 +12,7 @@ public class User {
     private String birth;
     private String username;
     private String password;
+    private Shop[] shop;
 
     public String getName() {
         return name;
@@ -48,6 +49,10 @@ public class User {
     public String getBirth() {
         return birth;
     }
+
+    public Shop[] getShop() { return shop; }
+
+    public void setShop(Shop[] shop) { this.shop = shop; }
 
     public void setBirth(String birth) {
         this.birth = birth;

@@ -4,6 +4,7 @@ package com.jspark.android.kardoc;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.jspark.android.kardoc.domain.Shop;
+import com.jspark.android.kardoc.server.ApiServices;
+import com.jspark.android.kardoc.util.RetrofitUtil;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.jspark.android.kardoc.SignActivity.myToken;
 
 public class RepairShopMainActivity extends AppCompatActivity {
 
@@ -34,6 +45,7 @@ public class RepairShopMainActivity extends AppCompatActivity {
     Dialog customDialog;
     String getUri = "";
 
+    ApiServices apiServices = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +54,18 @@ public class RepairShopMainActivity extends AppCompatActivity {
 
         setWidget();
 
+        setRetrofit();
+
         buttonDisable();
 
         setListener();
 
         checkPermission();
+    }
+
+    private void setRetrofit() {
+        RetrofitUtil retrofit = RetrofitUtil.getInstance();
+        apiServices = retrofit.getApiServices();
     }
 
     // 버튼 비활성화하기
@@ -101,7 +120,9 @@ public class RepairShopMainActivity extends AppCompatActivity {
     private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            Boolean hasError = false;
             Intent intent = null;
+            Shop shop = new Shop();
             switch (v.getId()) {
                 case R.id.btnCamera: //카메라 버튼 동작
                     intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -144,8 +165,32 @@ public class RepairShopMainActivity extends AppCompatActivity {
                     }
                     break;
                 case R.id.save:
-                    intent = new Intent(RepairShopMainActivity.this, LobbyActivity.class);
-                    startActivity(intent);
+                    if(!hasError) {
+                        //SHOP 이미 저장되어 있음
+                        SharedPreferences sharedPreferences = getSharedPreferences(myToken, MODE_PRIVATE);
+                        String token = sharedPreferences.getString(myToken, null);
+
+                        Call<Shop> uploadurl = apiServices.uploadmovie("Token "+token, 1, SignupRepairShopActivity.SHOP.getShopname(), getUri);
+                        uploadurl.enqueue(new Callback<Shop>() {
+                            @Override
+                            public void onResponse(Call<Shop> call, Response<Shop> response) {
+                                Log.w("response", response.toString());
+                                //response.
+                                if (response.code() == 201) {
+
+                                    Intent intent = new Intent(RepairShopMainActivity.this, LobbyActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                            //Log
+
+                            @Override
+                            public void onFailure(Call<Shop> call, Throwable t) {
+
+                            }
+                        });
+                    }
                     break;
             }
         }
