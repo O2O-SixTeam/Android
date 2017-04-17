@@ -178,10 +178,10 @@ public class RequestEstimationActivity extends AppCompatActivity {
                 }
 
                 // 추가 서비스 확인
-                estimation.setInsurancerepait(insuranceCheckBox.isChecked());
+                estimation.setInsurancerepair(insuranceCheckBox.isChecked());
                 estimation.setRentcar(rentcarCheckBox.isChecked());
                 estimation.setPickup(pickupCheckBox.isChecked());
-                Log.w("services", estimation.getInsurancerepait() + " / " +estimation.getRentcar() + " / " + estimation.getPickup());
+                Log.w("services", estimation.getInsurancerepair() + " / " +estimation.getRentcar() + " / " + estimation.getPickup());
 
                 // 차대번호 확인
                 if(!("".equals(carVinField.getText().toString()))) {
@@ -207,6 +207,7 @@ public class RequestEstimationActivity extends AppCompatActivity {
                 if(!hasError) {
                     SharedPreferences sharedPreferences = getSharedPreferences(myToken, MODE_PRIVATE);
                     String token = sharedPreferences.getString(myToken, null);
+                    Log.w("gettoken", token);
 
                     Call<ResponseBody> reqeustEstimation = apiServices.request("Token "+token, estimation);
                     reqeustEstimation.enqueue(new Callback<ResponseBody>() {

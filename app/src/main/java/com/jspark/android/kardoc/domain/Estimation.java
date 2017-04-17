@@ -17,7 +17,7 @@ public class Estimation {
     private String extra;
     private String number;
     private Boolean completed;
-    private Boolean insurancerepait;
+    private Boolean insurancerepair;
     private Boolean rentcar;
     private Boolean pickup;
     private String carid;
@@ -111,12 +111,12 @@ public class Estimation {
         this.estimate = estimate;
     }
 
-    public Boolean getInsurancerepait() {
-        return insurancerepait;
+    public Boolean getInsurancerepair() {
+        return insurancerepair;
     }
 
-    public void setInsurancerepait(Boolean insurancerepait) {
-        this.insurancerepait = insurancerepait;
+    public void setInsurancerepair(Boolean insurancerepair) {
+        this.insurancerepair = insurancerepair;
     }
 
     public Boolean getRentcar() {
