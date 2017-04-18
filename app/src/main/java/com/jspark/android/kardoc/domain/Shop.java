@@ -1,12 +1,13 @@
 package com.jspark.android.kardoc.domain;
 
-import android.media.Image;
+import retrofit2.http.Url;
 
 /**
  * Created by Songmoo on 2017-04-04.
  */
 
 public class Shop {
+    private Url url;
     private String shopname;
     private String address;
     private String zone;
@@ -15,7 +16,6 @@ public class Shop {
     private String longitude;
     private String latitude;
     private String bnumber;
-    private String url;
 
     public String getShopname() {
         return shopname;
@@ -81,7 +81,7 @@ public class Shop {
         this.bnumber = bnumber;
     }
 
-    public String getUrl() { return url; }
+    public Url getUrl() { return url; }
 
-    public void setUrl(String url) { this.url = url; }
+    public void setUrl(Url url) { this.url = url; }
 }

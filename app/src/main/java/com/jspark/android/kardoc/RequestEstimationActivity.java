@@ -16,7 +16,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jspark.android.kardoc.domain.Estimation;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.RetrofitUtil;
 
@@ -28,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.jspark.android.kardoc.SignActivity.myToken;
+import static com.jspark.android.kardoc.SignActivity.MY_TOKEN;
 
 /**
  * Created by Songmoo on 2017-03-26.
@@ -139,24 +138,37 @@ public class RequestEstimationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Boolean hasError = false;
 
-                Estimation estimation = new Estimation();
-                if(viewNum==0) {
-                    estimation.setBroken1((spinners.get(0)).getSelectedItem().toString());
-                } else if(viewNum==1) {
-                    estimation.setBroken1((spinners.get(0)).getSelectedItem().toString());
-                    estimation.setBroken2((spinners.get(1)).getSelectedItem().toString());
-                } else if(viewNum==2) {
-                    estimation.setBroken1((spinners.get(0)).getSelectedItem().toString());
-                    estimation.setBroken2((spinners.get(1)).getSelectedItem().toString());
-                    estimation.setBroken3((spinners.get(2)).getSelectedItem().toString());
-                }
-                Log.w("brokens", estimation.getBroken1() + " / " + estimation.getBroken2() + " / " + estimation.getBroken3());
+                String brandData = "";
+                String modelData = "";
+                String carnumberData = "";
+                String broken1Data = "";
+                String broken2Data = "";
+                String broken3Data = "";
+                String detailData = "";
+                String numberData = "";
+                Boolean completedData = false;
+                Boolean insurancerepairData = false;
+                Boolean rentcarData = false;
+                Boolean pickupData = false;
+                String caridData = "";
 
+                // 매칭 완료 false
+                completedData = Boolean.FALSE;
+
+                if(viewNum==0) {
+                    broken1Data = ((spinners.get(0)).getSelectedItem().toString());
+                } else if(viewNum==1) {
+                    broken1Data = (spinners.get(0)).getSelectedItem().toString();
+                    broken2Data = ((spinners.get(1)).getSelectedItem().toString());
+                } else if(viewNum==2) {
+                    broken1Data = (spinners.get(0)).getSelectedItem().toString();
+                    broken2Data = ((spinners.get(1)).getSelectedItem().toString());
+                    broken3Data = ((spinners.get(2)).getSelectedItem().toString());
+                }
 
                 // 브랜드 선택 유무 확인
                 if(!btnBrand.getText().toString().contains("*")) {
-                    estimation.setBrand(btnBrand.getText().toString());
-                    Log.w("brand", estimation.getBrand());
+                    brandData = (btnBrand.getText().toString());
                 } else {
                     hasError = true;
                     Toast.makeText(RequestEstimationActivity.this, "차량 제조사를 선택해주세요", Toast.LENGTH_SHORT).show();
@@ -164,8 +176,7 @@ public class RequestEstimationActivity extends AppCompatActivity {
 
                 // 차량명 / 연식 입력 확인
                 if(!("".equals(carNameField.getText().toString()))) {
-                    estimation.setModel(carNameField.getText().toString());
-                    Log.w("model", estimation.getModel());
+                    modelData = (carNameField.getText().toString());
                 } else {
                     hasError = true;
                     Toast.makeText(RequestEstimationActivity.this, "차량명과 연식을 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -173,25 +184,37 @@ public class RequestEstimationActivity extends AppCompatActivity {
 
                 // 차량번호 입력 확인 (선택 사항이므로 에러표기 안함)
                 if(!("".equals(carNumberField.getText().toString()))) {
-                    estimation.setCarnumber(carNumberField.getText().toString());
-                    Log.w("number", carNumberField.getText().toString());
+                    carnumberData = (carNumberField.getText().toString());
                 }
 
                 // 추가 서비스 확인
-                estimation.setInsurancerepair(insuranceCheckBox.isChecked());
-                estimation.setRentcar(rentcarCheckBox.isChecked());
-                estimation.setPickup(pickupCheckBox.isChecked());
-                Log.w("services", estimation.getInsurancerepair() + " / " +estimation.getRentcar() + " / " + estimation.getPickup());
+                if(insuranceCheckBox.isChecked()) {
+                    insurancerepairData = Boolean.TRUE;
+                } else {
+                    insurancerepairData = Boolean.FALSE;
+                }
+                if(rentcarCheckBox.isChecked()) {
+                    rentcarData = Boolean.TRUE;
+                } else {
+                    rentcarData = Boolean.FALSE;
+                }
+                if(pickupCheckBox.isChecked()) {
+                    pickupData = Boolean.TRUE;
+                } else {
+                    pickupData = Boolean.FALSE;
+                }
+//                insurancerepairData = insuranceCheckBox.isChecked();
+//                rentcarData = rentcarCheckBox.isChecked();
+//                pickupData = pickupCheckBox.isChecked();
 
                 // 차대번호 확인
                 if(!("".equals(carVinField.getText().toString()))) {
-                    estimation.setCarid(carVinField.getText().toString());
-                    Log.w("vin", estimation.getCarid());
+                    caridData = (carVinField.getText().toString());
                 }
 
                 // 연락처 확인
                 if(!("".equals(phoneNumberField.getText().toString()))) {
-                    estimation.setNumber(phoneNumberField.getText().toString());
+                    numberData = (phoneNumberField.getText().toString());
                 } else {
                     hasError = true;
                     Toast.makeText(RequestEstimationActivity.this, "연락처를 확인해주세요", Toast.LENGTH_SHORT).show();
@@ -205,12 +228,12 @@ public class RequestEstimationActivity extends AppCompatActivity {
 
                 // 오류 없을 시
                 if(!hasError) {
-                    SharedPreferences sharedPreferences = getSharedPreferences(myToken, MODE_PRIVATE);
-                    String token = sharedPreferences.getString(myToken, null);
+                    SharedPreferences sharedPreferences = getSharedPreferences(MY_TOKEN, MODE_PRIVATE);
+                    String token = sharedPreferences.getString(MY_TOKEN, null);
                     Log.w("gettoken", token);
 
-                    Call<ResponseBody> reqeustEstimation = apiServices.request("Token "+token, estimation);
-                    reqeustEstimation.enqueue(new Callback<ResponseBody>() {
+                    Call<ResponseBody> requestEstimation = apiServices.request("Token "+token, brandData, modelData,carnumberData,broken1Data,broken2Data,broken3Data,detailData,numberData,completedData,insurancerepairData,rentcarData,pickupData,caridData);
+                    requestEstimation.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             Log.w("response", response.toString());

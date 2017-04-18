@@ -42,7 +42,7 @@ import retrofit2.Response;
 
 public class SignActivity extends AppCompatActivity {
 
-    public static final String myToken = "myToken";
+    public static final String MY_TOKEN = "MY_TOKEN";
 
     private LoginButton signinFacebook;
     private CallbackManager callbackManager;
@@ -400,7 +400,7 @@ public class SignActivity extends AppCompatActivity {
             }
 
             if(!hasError) {
-                SharedPreferences sharedPreferences = getSharedPreferences(myToken, Context.MODE_PRIVATE);
+                SharedPreferences sharedPreferences = getSharedPreferences(MY_TOKEN, Context.MODE_PRIVATE);
 
                 // 이전의 토큰 값 보기
                 String originalToken = sharedPreferences.getString("token" + myId, "null");
@@ -420,10 +420,10 @@ public class SignActivity extends AppCompatActivity {
                             Log.w("token get", response.body().getToken());
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("token" + userName, response.body().getToken());
-                            editor.putString(myToken, response.body().getToken());
+                            editor.putString(MY_TOKEN, response.body().getToken());
                             editor.commit();
                             Log.w("token shared", sharedPreferences.getString("token" + userName, "null"));
-                            Log.w("token mine", sharedPreferences.getString(myToken, "null"));
+                            Log.w("token mine", sharedPreferences.getString(MY_TOKEN, "null"));
 
 
                             Intent i  = new Intent(SignActivity.this, LobbyActivity.class);

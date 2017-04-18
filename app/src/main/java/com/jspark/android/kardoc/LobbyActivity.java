@@ -18,8 +18,12 @@ import android.widget.ImageView;
 public class LobbyActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    public static final int CREATE_SHOP = 201;
+
     Button btnEnroll;
     ImageView caseFender, caseBumper, caseAudi, caseBenz, caseBmw;
+
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class LobbyActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 

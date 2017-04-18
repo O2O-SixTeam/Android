@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.jspark.android.kardoc.SignActivity.myToken;
+import static com.jspark.android.kardoc.SignActivity.MY_TOKEN;
 
 public class RepairShopMainActivity extends AppCompatActivity {
     //@@@@@ 지울것
@@ -168,8 +168,8 @@ public class RepairShopMainActivity extends AppCompatActivity {
                 case R.id.save:
                     if(!hasError) {
                         //SHOP = 로그인이 되어있는 유저
-                        SharedPreferences sharedPreferences = getSharedPreferences(myToken, MODE_PRIVATE);
-                        String token = sharedPreferences.getString(myToken, null);
+                        SharedPreferences sharedPreferences = getSharedPreferences(MY_TOKEN, MODE_PRIVATE);
+                        String token = sharedPreferences.getString(MY_TOKEN, null);
 
                         Call<Shop> uploadurl = apiServices.uploadmovie("Token "+token, SHOP.getShopname(), getUrl);
                         uploadurl.enqueue(new Callback<Shop>() {

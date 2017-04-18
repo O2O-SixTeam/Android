@@ -27,7 +27,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.jspark.android.kardoc.SignActivity.MY_TOKEN;
+
 public class SignupRepairShopActivity extends AppCompatActivity {
+
+    public static final String SHOP_OWNER = "shop_owner";
 
     Button btnCancle;
     Button btnSignup;
@@ -150,24 +154,21 @@ public class SignupRepairShopActivity extends AppCompatActivity {
             try {
                 longitudeData = String.valueOf(geocoder.getFromLocationName(addressData, 1).get(0).getLongitude());
                 latitudeData = String.valueOf(geocoder.getFromLocationName(addressData, 1).get(0).getLatitude());
-                Log.w("longitude", longitudeData);
-                Log.w("latitude", latitudeData);
             } catch(Exception e) {
                 e.printStackTrace();
             }
 
             //상호 소개 검사
             if (!("".equals(EditUtil.gTFE(editCompanyIntroduction)))) {
-                Log.w("Dialog Button Test", "회사 소개 : " + EditUtil.gTFE(editCompanyIntroduction));
-
+                detailData = EditUtil.gTFE(editCompanyIntroduction);
             } else {
                 hasError = true;
                 Toast.makeText(SignupRepairShopActivity.this, "회사 소개를 입력해주세요", Toast.LENGTH_SHORT).show();
             }
 
             if (!hasError) {
-                SharedPreferences sharedPreferences = getSharedPreferences(SignActivity.myToken, Context.MODE_PRIVATE);
-                String token = sharedPreferences.getString(SignActivity.myToken, "null");
+                SharedPreferences sharedPreferences = getSharedPreferences(MY_TOKEN, Context.MODE_PRIVATE);
+                String token = sharedPreferences.getString(MY_TOKEN, "null");
 
                 Shop shop = new Shop();
                 shop.setShopname(shopNameData);
@@ -178,21 +179,17 @@ public class SignupRepairShopActivity extends AppCompatActivity {
                 shop.setLongitude(longitudeData);
                 shop.setLatitude(latitudeData);
 
-                Call<Shop> remoteData = apiServices.createShop("Token "+token, shop);
-                remoteData.enqueue(new Callback<Shop>() {
+                Call<ResponseBody> remoteData = apiServices.createShop("Token "+token, shop);
+                remoteData.enqueue(new Callback<ResponseBody>() {
                     @Override
-                    public void onResponse(Call<Shop> call, Response<Shop> response) {
-                        Log.w("token", token);
-                        Log.w("response", response.toString());
-                        if(response.code()==201) {
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()) {
                             finish();
-                        } else {
-
                         }
                     }
                     @Override
-                    public void onFailure(Call<Shop> call, Throwable t) {
-
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Log.d("error", t.toString());
                     }
                 });
 

@@ -1,7 +1,5 @@
 package com.jspark.android.kardoc.domain;
 
-import retrofit2.http.Url;
-
 /**
  * Created by jsPark on 2017. 4. 17..
  */
@@ -14,14 +12,12 @@ public class Estimation {
     private String broken2;
     private String broken3;
     private String detail;
-    private String extra;
     private String number;
     private Boolean completed;
     private Boolean insurancerepair;
     private Boolean rentcar;
     private Boolean pickup;
     private String carid;
-    private Url estimate;
 
     public String getBrand() {
         return brand;
@@ -79,14 +75,6 @@ public class Estimation {
         this.detail = detail;
     }
 
-    public String getExtra() {
-        return extra;
-    }
-
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
-
     public String getNumber() {
         return number;
     }
@@ -101,14 +89,6 @@ public class Estimation {
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
-    }
-
-    public Url getEstimate() {
-        return estimate;
-    }
-
-    public void setEstimate(Url estimate) {
-        this.estimate = estimate;
     }
 
     public Boolean getInsurancerepair() {
