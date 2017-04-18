@@ -15,13 +15,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+
 public class LobbyActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public static final int CREATE_SHOP = 201;
 
     Button btnEnroll;
-    ImageView caseFender, caseBumper, caseAudi, caseBenz, caseBmw;
+    ImageView caseAll, caseFender, caseBumper, caseAudi, caseBenz, caseBmw;
 
     NavigationView navigationView;
 
@@ -45,6 +47,8 @@ public class LobbyActivity extends AppCompatActivity
 
 
         setWidgets();
+
+        setImageViews();
 
         setBtnEnroll();
 
@@ -114,11 +118,21 @@ public class LobbyActivity extends AppCompatActivity
 
     private void setWidgets() {
         btnEnroll = (Button)findViewById(R.id.btnEnroll);
+        caseAll = (ImageView)findViewById(R.id.caseAll);
         caseFender = (ImageView)findViewById(R.id.caseFender);
         caseBumper = (ImageView)findViewById(R.id.caseBumper);
         caseAudi = (ImageView)findViewById(R.id.caseAudi);
         caseBenz = (ImageView)findViewById(R.id.caseBenz);
         caseBmw = (ImageView)findViewById(R.id.caseBmw);
+    }
+
+    private void setImageViews() {
+        Glide.with(this).load(R.mipmap.case_all).into(caseAll);
+        Glide.with(this).load(R.mipmap.case_fender).into(caseFender);
+        Glide.with(this).load(R.mipmap.case_bumper).into(caseBumper);
+        Glide.with(this).load(R.mipmap.case_audi).into(caseAudi);
+        Glide.with(this).load(R.mipmap.case_benz).into(caseBenz);
+        Glide.with(this).load(R.mipmap.case_bmw).into(caseBmw);
     }
 
     private void setBtnEnroll() {
@@ -147,9 +161,13 @@ public class LobbyActivity extends AppCompatActivity
                 case R.id.caseBmw :
                     i.putExtra("case", "bmw");
                     break;
+                case R.id.caseAll :
+                    i.putExtra("case", "all");
+                    break;
             }
             startActivity(i);
         };
+        caseAll.setOnClickListener(imageClick);
         caseFender.setOnClickListener(imageClick);
         caseBumper.setOnClickListener(imageClick);
         caseAudi.setOnClickListener(imageClick);

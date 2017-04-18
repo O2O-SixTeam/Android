@@ -43,16 +43,29 @@
                 android:textColor="#FFFFFFFF" />
         </LinearLayout>
         <TextView
-            android:id="@+id/divider1"
+            android:id="@+id/divider0"
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:layout_below="@id/enrollLayout"
             android:background="#FFDDDDDD"/>
         <ImageView
+            android:id="@+id/caseAll"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_below="@id/divider0"
+            android:scaleType="fitXY"/>
+        <TextView
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="8dp"
+            android:layout_below="@id/caseAll"
+            android:background="#FFDDDDDD"/>
+        <ImageView
             android:id="@+id/caseFender"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_below="@id/divider1"/>
+            android:layout_below="@id/divider1"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/divider2"
             android:layout_width="match_parent"
@@ -63,7 +76,8 @@
             android:id="@+id/caseBumper"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_below="@id/divider2"/>
+            android:layout_below="@id/divider2"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/divider3"
             android:layout_width="match_parent"
@@ -74,7 +88,8 @@
             android:id="@+id/caseAudi"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_below="@id/divider3"/>
+            android:layout_below="@id/divider3"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/divider4"
             android:layout_width="match_parent"
@@ -85,7 +100,8 @@
             android:id="@+id/caseBenz"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_below="@id/divider4"/>
+            android:layout_below="@id/divider4"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/divider5"
             android:layout_width="match_parent"
@@ -96,7 +112,8 @@
             android:id="@+id/caseBmw"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_below="@id/divider5"/>
+            android:layout_below="@id/divider5"
+            android:scaleType="fitXY"/>
         <TextView
             android:id="@+id/divider6"
             android:layout_width="match_parent"

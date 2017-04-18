@@ -36,7 +36,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
     Button btnCancle;
     Button btnSignup;
 
-    EditText editShopName, editShopNumber, editDetailAddress, editCompanyIntroduction;
+    EditText editShopName, editShopNumber, editDetailAddress, editCompanyIntroduction, editOwnerNumber;
 
     WebView zipCodeWebView;
     TextView zipCodeTest;
@@ -88,6 +88,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
         zipCodeTest = (TextView)findViewById(R.id.zipCodeText);
         editDetailAddress = (EditText)findViewById(R.id.editDetialAddress);
         editCompanyIntroduction = (EditText) findViewById(R.id.editCompanyIntroduction);
+        editOwnerNumber = (EditText)findViewById(R.id.editOwnerNumber);
         // 위젯 선언
 
         // 전화번호에 하이픈 없이 달라고 함
@@ -166,6 +167,13 @@ public class SignupRepairShopActivity extends AppCompatActivity {
                 Toast.makeText(SignupRepairShopActivity.this, "회사 소개를 입력해주세요", Toast.LENGTH_SHORT).show();
             }
 
+            if(!("".equals(EditUtil.gTFE(editOwnerNumber)))) {
+                bnumberData = EditUtil.gTFE(editOwnerNumber);
+            } else {
+                hasError = true;
+                Toast.makeText(SignupRepairShopActivity.this, "사업자 번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+            }
+
             if (!hasError) {
                 SharedPreferences sharedPreferences = getSharedPreferences(MY_TOKEN, Context.MODE_PRIVATE);
                 String token = sharedPreferences.getString(MY_TOKEN, "null");
@@ -176,6 +184,7 @@ public class SignupRepairShopActivity extends AppCompatActivity {
                 shop.setZone(zoneData);
                 shop.setDetail(detailData);
                 shop.setNumber(numberData);
+                shop.setBnumber(bnumberData);
                 shop.setLongitude(longitudeData);
                 shop.setLatitude(latitudeData);
 

@@ -89,6 +89,22 @@
             android:hint="ex) My company is Really nice~" />
 
         <TextView
+            android:id="@+id/ownerNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editCompanyIntroduction"
+            android:text="사업자 번호" />
+
+        <EditText
+            android:id="@+id/editOwnerNumber"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/ownerNumber"
+            android:background="@drawable/edit_text_styling"
+            android:hint="***-**-*****"
+            android:digits="1234567890-"/>
+
+        <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

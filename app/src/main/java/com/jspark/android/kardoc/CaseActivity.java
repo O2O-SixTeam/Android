@@ -52,7 +52,7 @@ public class CaseActivity extends AppCompatActivity {
             case "bmw" :
 
                 break;
-            default :
+            case "all" :
 
                 break;
         }
