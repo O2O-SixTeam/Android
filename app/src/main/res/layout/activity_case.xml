@@ -5,11 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.jspark.android.kardoc.CaseActivity">
+    
+    <TextView
+        android:id="@+id/tabView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorPrimary"/>
+
+    <ImageButton
+        android:id="@+id/backButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="8dp"
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/caseRecycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/tabView">
 
     </android.support.v7.widget.RecyclerView>
 

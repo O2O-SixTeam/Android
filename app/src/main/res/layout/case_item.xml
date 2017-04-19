@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/repreImage"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_margin="8dp"
+            android:layout_marginRight="8dp" />
+
+        <TextView
+            android:id="@+id/brandText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_toRightOf="@id/repreImage"
+            android:layout_marginTop="16dp"
+            android:text="BMW"
+            android:textColor="#FF000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/modelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/brandText"
+            android:layout_marginTop="16dp"
+            android:text="320d / 2015"
+            android:textColor="#FF000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/partText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/brandText"
+            android:layout_toRightOf="@id/repreImage"
+            android:layout_marginTop="8dp"
+            android:text="범퍼"
+            android:textColor="#aa000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/priceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/repreImage"
+            android:layout_below="@id/partText"
+            android:layout_toRightOf="@id/repreImage"
+            android:layout_marginBottom="16dp"
+            android:gravity="bottom"
+            android:text="₩300,000"
+            android:textColor="#FF000000"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="#FF000000"/>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

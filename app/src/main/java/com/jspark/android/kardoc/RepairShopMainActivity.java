@@ -178,7 +178,6 @@ public class RepairShopMainActivity extends AppCompatActivity {
                                 Log.w("response", response.toString());
                                 //response.
                                 if (response.code() == 201) {
-
                                     Intent intent = new Intent(RepairShopMainActivity.this, LobbyActivity.class);
                                     startActivity(intent);
                                     finish();

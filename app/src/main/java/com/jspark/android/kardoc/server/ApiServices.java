@@ -1,9 +1,12 @@
 package com.jspark.android.kardoc.server;
 
-import com.jspark.android.kardoc.domain.Estimation;
+import com.jspark.android.kardoc.domain.Request;
 import com.jspark.android.kardoc.domain.Result;
 import com.jspark.android.kardoc.domain.Shop;
 import com.jspark.android.kardoc.domain.User;
+
+import java.util.List;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;
@@ -16,6 +19,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.QueryMap;
 
 /**
  * Created by jsPark on 2017. 4. 3..
@@ -82,7 +86,11 @@ public interface ApiServices {
 
     // 견적 요청서 열람
     @GET("request/")
-    Call<Estimation> loadRequests(
+    Call<List<Request>> loadRequests();
 
+    // 파손 부위별 견적 요청서 열람
+    @GET("request/")
+    Call<List<Request>> loadBroken(
+            @QueryMap Map<String, String> options
     );
 }

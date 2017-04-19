@@ -1,70 +1,67 @@
 package com.jspark.android.kardoc.domain;
 
+import java.net.URL;
+
 /**
- * Created by jsPark on 2017. 4. 17..
+ * Created by jsPark on 2017. 4. 19..
  */
 
 public class Estimation {
-    private String brand;
-    private String model;
-    private String carnumber;
-    private String broken1;
-    private String broken2;
-    private String broken3;
+    private URL url;
+    private String owner;
+    private String pk;
+    private String targetrequest;
+    private String noninsurancecost;
+    private String insurancecost;
     private String detail;
-    private String number;
     private Boolean completed;
-    private Boolean insurancerepair;
-    private Boolean rentcar;
-    private Boolean pickup;
-    private String carid;
 
-    public String getBrand() {
-        return brand;
+    public URL getUrl() {
+        return url;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setUrl(URL url) {
+        this.url = url;
     }
 
-    public String getModel() {
-        return model;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
-    public String getCarnumber() {
-        return carnumber;
+    public String getPk() {
+        return pk;
     }
 
-    public void setCarnumber(String carnumber) {
-        this.carnumber = carnumber;
+    public void setPk(String pk) {
+        this.pk = pk;
     }
 
-    public String getBroken1() {
-        return broken1;
+    public String getTargetrequest() {
+        return targetrequest;
     }
 
-    public void setBroken1(String broken1) {
-        this.broken1 = broken1;
+    public void setTargetrequest(String targetrequest) {
+        this.targetrequest = targetrequest;
     }
 
-    public String getBroken2() {
-        return broken2;
+    public String getNoninsurancecost() {
+        return noninsurancecost;
     }
 
-    public void setBroken2(String broken2) {
-        this.broken2 = broken2;
+    public void setNoninsurancecost(String noninsurancecost) {
+        this.noninsurancecost = noninsurancecost;
     }
 
-    public String getBroken3() {
-        return broken3;
+    public String getInsurancecost() {
+        return insurancecost;
     }
 
-    public void setBroken3(String broken3) {
-        this.broken3 = broken3;
+    public void setInsurancecost(String insurancecost) {
+        this.insurancecost = insurancecost;
     }
 
     public String getDetail() {
@@ -75,51 +72,11 @@ public class Estimation {
         this.detail = detail;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
     public Boolean getCompleted() {
         return completed;
     }
 
     public void setCompleted(Boolean completed) {
         this.completed = completed;
-    }
-
-    public Boolean getInsurancerepair() {
-        return insurancerepair;
-    }
-
-    public void setInsurancerepair(Boolean insurancerepair) {
-        this.insurancerepair = insurancerepair;
-    }
-
-    public Boolean getRentcar() {
-        return rentcar;
-    }
-
-    public void setRentcar(Boolean rentcar) {
-        this.rentcar = rentcar;
-    }
-
-    public Boolean getPickup() {
-        return pickup;
-    }
-
-    public void setPickup(Boolean pickup) {
-        this.pickup = pickup;
-    }
-
-    public String getCarid() {
-        return carid;
-    }
-
-    public void setCarid(String carid) {
-        this.carid = carid;
     }
 }

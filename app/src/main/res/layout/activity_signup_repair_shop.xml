@@ -93,14 +93,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/editCompanyIntroduction"
+            android:layout_marginTop="16dp"
             android:text="사업자 번호" />
 
         <EditText
             android:id="@+id/editOwnerNumber"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/ownerNumber"
-            android:background="@drawable/edit_text_styling"
             android:hint="***-**-*****"
             android:digits="1234567890-"/>
 
@@ -108,7 +108,7 @@
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/editCompanyIntroduction"
+            android:layout_below="@+id/editOwnerNumber"
             android:text=" - 입점신청과 상담은 모두 무료입니다."/>
 
         <TextView
@@ -135,7 +135,5 @@
             android:layout_marginRight="16dp"
             android:layout_toLeftOf="@id/buttonSignupCompany"
             android:text="@string/cancle" />
-
-
     </RelativeLayout>
 </ScrollView>
