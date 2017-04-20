@@ -7,6 +7,7 @@ import java.net.URL;
  */
 
 public class Request {
+    private String requestedby;
     private String brand;
     private String model;
     private String carnumber;
@@ -24,6 +25,14 @@ public class Request {
     private Boolean rentcar;
     private Boolean pickup;
     private String carid;
+
+    public String getRequestedby() {
+        return requestedby;
+    }
+
+    public void setRequestedby(String requestedby) {
+        this.requestedby = requestedby;
+    }
 
     public String getBrand() {
         return brand;

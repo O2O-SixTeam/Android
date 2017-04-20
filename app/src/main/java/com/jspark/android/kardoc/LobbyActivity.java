@@ -97,7 +97,8 @@ public class LobbyActivity extends AppCompatActivity
         Log.w("drawer item", String.valueOf(item));
 
         if (id == R.id.nav_estimation) {
-            // Handle the camera action
+            intent = new Intent(LobbyActivity.this, RequestsActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_myPage) {
 
         } else if (id == R.id.nav_requestShop) {

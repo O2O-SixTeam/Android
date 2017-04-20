@@ -90,7 +90,7 @@ public interface ApiServices {
 
     // 파손 부위별 견적 요청서 열람
     @GET("request/")
-    Call<List<Request>> loadBroken(
+    Call<List<Request>> loadCase(
             @QueryMap Map<String, String> options
     );
 }

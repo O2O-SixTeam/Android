@@ -56,8 +56,8 @@ public class BrandActivity extends AppCompatActivity {
                             ,R.mipmap.trans_porsche, R.mipmap.trans_renault, R.mipmap.trans_rollsroyce, R.mipmap.trans_saab
                             ,R.mipmap.trans_scion, R.mipmap.trans_smart, R.mipmap.trans_ssangyong, R.mipmap.trans_subaru
                             ,R.mipmap.trans_suzuki, R.mipmap.trans_toyota, R.mipmap.trans_volkswagen, R.mipmap.trans_volvo};
-        String brandNames[] = {"Acura", "Alfa Romeo", "Aston Martin", "Audi"
-                            , "Bentley", "Benz", "BMW", "Bugatti"
+        String brandNames[] = {"Acura", "Alfa Romeo", "Aston Martin", "아우디"
+                            , "Bentley", "벤츠", "BMW", "Bugatti"
                             , "Buick", "Cadillac", "Chevrolet", "Chrysler"
                             , "Citroen", "Dodge", "Ferrari", "Fiat"
                             , "Ford", "Genesis", "GM", "Honda"

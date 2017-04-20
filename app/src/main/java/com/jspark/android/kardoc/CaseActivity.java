@@ -17,8 +17,6 @@ import com.jspark.android.kardoc.domain.Request;
 import com.jspark.android.kardoc.server.ApiServices;
 import com.jspark.android.kardoc.util.RetrofitUtil;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,21 +53,13 @@ public class CaseActivity extends AppCompatActivity {
     private void setCase() {
         Intent i = getIntent();
         String caseBy = i.getStringExtra("case");
+        Map<String, String> options = new HashMap<>();
+        Call<List<Request>> loadCase = null;
         switch (caseBy) {
             case "fender" :
-                String fender = "";
-                try {
-                    fender = URLEncoder.encode("펜더", "utf-8");
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                Map<String, String> options = new HashMap<>();
-//                options.put("broken1", fender);
-//                options.put("broken2", fender);
-//                options.put("broken3", fender);
-                options.put("brand", "BMW");
-                Call<List<Request>> loadBroken = apiServices.loadBroken(options);
-                loadBroken.enqueue(new Callback<List<Request>>() {
+                options.put("broken1", "펜더");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
                     @Override
                     public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
                         if(response.isSuccessful()) {
@@ -85,16 +75,76 @@ public class CaseActivity extends AppCompatActivity {
                 });
                 break;
             case "bumper" :
+                options.put("broken1", "범퍼");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            listData = response.body();
+                            setRecyclerView();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
                 break;
             case "audi" :
+                options.put("brand", "아우디");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            listData = response.body();
+                            setRecyclerView();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
                 break;
             case "benz" :
+                options.put("brand", "벤츠");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            listData = response.body();
+                            setRecyclerView();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
                 break;
             case "bmw" :
+                options.put("brand", "BMW");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            listData = response.body();
+                            setRecyclerView();
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
                 break;
             case "all" :
                 Call<List<Request>> loadAll = apiServices.loadRequests();

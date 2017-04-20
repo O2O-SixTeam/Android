@@ -3,9 +3,9 @@
     package="com.jspark.android.kardoc">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -28,7 +28,7 @@
         <activity
             android:name=".RequestEstimationActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".SignActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -41,7 +41,8 @@
         <activity android:name=".BrandActivity" />
         <activity android:name=".SignupRepairShopActivity" />
         <activity android:name=".RepairShopMainActivity" />
-        <activity android:name=".CaseActivity"/>
+        <activity android:name=".CaseActivity" />
+        <activity android:name=".RequestsActivity"></activity>
     </application>
 
 </manifest>

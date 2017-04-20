@@ -421,6 +421,7 @@ public class SignActivity extends AppCompatActivity {
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("token" + userName, response.body().getToken());
                             editor.putString(MY_TOKEN, response.body().getToken());
+                            editor.putString("USERNAME", userName);
                             editor.commit();
                             Log.w("token shared", sharedPreferences.getString("token" + userName, "null"));
                             Log.w("token mine", sharedPreferences.getString(MY_TOKEN, "null"));
