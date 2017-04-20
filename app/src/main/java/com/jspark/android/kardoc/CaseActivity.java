@@ -30,7 +30,7 @@ public class CaseActivity extends AppCompatActivity {
 
     ApiServices apiServices = null;
     RecyclerView lists;
-    List<Request> listData = new ArrayList<>();
+    List<Request> listData;
     CaseAdapter adapter;
     ImageButton backButton;
 
@@ -52,6 +52,7 @@ public class CaseActivity extends AppCompatActivity {
 
     private void setCase() {
         Intent i = getIntent();
+        listData = new ArrayList<>();
         String caseBy = i.getStringExtra("case");
         Map<String, String> options = new HashMap<>();
         Call<List<Request>> loadCase = null;
@@ -64,6 +65,46 @@ public class CaseActivity extends AppCompatActivity {
                     public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
                         if(response.isSuccessful()) {
                             listData = response.body();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
+                options.clear();
+                options.put("broken2", "펜더");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            for(Request item : response.body()) {
+                                if(!("펜더".equals(item.getBroken1()))) {
+                                    listData.add(item);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
+                options.clear();
+                options.put("broken3", "펜더");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            for(Request item : response.body()) {
+                                if(!("펜더".equals(item.getBroken1())&&!("펜더".equals(item.getBroken2())))) {
+                                    listData.add(item);
+                                }
+                            }
                             setRecyclerView();
                         }
                     }
@@ -82,6 +123,46 @@ public class CaseActivity extends AppCompatActivity {
                     public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
                         if(response.isSuccessful()) {
                             listData = response.body();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
+                options.clear();
+                options.put("broken2", "범퍼");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            for(Request item : response.body()) {
+                                if(!("범퍼".equals(item.getBroken1()))) {
+                                    listData.add(item);
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Request>> call, Throwable t) {
+
+                    }
+                });
+                options.clear();
+                options.put("broken3", "범퍼");
+                loadCase = apiServices.loadCase(options);
+                loadCase.enqueue(new Callback<List<Request>>() {
+                    @Override
+                    public void onResponse(Call<List<Request>> call, Response<List<Request>> response) {
+                        if(response.isSuccessful()) {
+                            for(Request item : response.body()) {
+                                if(!("범퍼".equals(item.getBroken1())&&!("범퍼".equals(item.getBroken2())))) {
+                                    listData.add(item);
+                                }
+                            }
                             setRecyclerView();
                         }
                     }
